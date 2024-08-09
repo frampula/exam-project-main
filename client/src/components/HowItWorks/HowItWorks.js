@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Lottie from 'lottie-react';
-import firstImg from '../../window 1.json';
+import firstAnimation from '../../FirstAnimation.json';
+import secondAnimation from '../../SecondAnimation.json';
+import thirdAnimation from '../../thirdAnimation.json'
 
 class HowItWorks extends Component {
   render() {
@@ -13,7 +15,7 @@ class HowItWorks extends Component {
               Squadhelp will support you on your way of
             </span>
             <span className="taglineSupport">dreams!</span>
-            <div className="info">
+            <div className="sponsors">
               <a href="https://www.forbes.com/">
                 <img
                   className="img"
@@ -39,22 +41,25 @@ class HowItWorks extends Component {
               <div className="paragraph">Step 1: Launch a Naming Contest.</div>
               <div className="subParagraph">
                 <img
-                  src="https://pngicon.ru/file/uploads/zelenaja-galochka.png"
+                  src="https://art.kartinkof.club/uploads/posts/2023-07/thumbs/1689244855_art-kartinkof-club-p-idei-dlya-srisovki-galochka-86.png"
                   className="checkMark"
                 ></img>
                 Start your project right with our proven Naming Brief template.
               </div>
               <div className="subParagraph">
                 <img
-                  src="https://pngicon.ru/file/uploads/zelenaja-galochka.png"
+                  src="https://art.kartinkof.club/uploads/posts/2023-07/thumbs/1689244855_art-kartinkof-club-p-idei-dlya-srisovki-galochka-86.png"
                   className="checkMark"
                 ></img>
                 We`ll walk you through exactly what you need to share about your
                 project in order to get an awesome Name.
               </div>
             </div>
-            <Lottie className="firstImg" animationData={firstImg} loop={true} />
-            ;
+            <Lottie
+              className="firstAnimation"
+              animationData={firstAnimation}
+              loop={true}
+            />
           </div>
 
           <div className="container2">
@@ -62,23 +67,25 @@ class HowItWorks extends Component {
               <div className="paragraph">
                 Step 2: Ideas start pouring in within minutes
               </div>
-              <div className='subParagraph'><img
-                src="https://pngicon.ru/file/uploads/zelenaja-galochka.png"
-                className="checkMark"
-              ></img>
-              100s of naming experts start submitting name ideas
+              <div className="subParagraph">
+                <img
+                  src="https://art.kartinkof.club/uploads/posts/2023-07/thumbs/1689244855_art-kartinkof-club-p-idei-dlya-srisovki-galochka-86.png"
+                  className="checkMark"
+                ></img>
+                100s of naming experts start submitting name ideas
               </div>
               <div className="subParagraph">
                 <img
-                  src="https://pngicon.ru/file/uploads/zelenaja-galochka.png"
+                  src="https://art.kartinkof.club/uploads/posts/2023-07/thumbs/1689244855_art-kartinkof-club-p-idei-dlya-srisovki-galochka-86.png"
                   className="checkMark"
                 ></img>
                 Names automatically checked for URL availability
               </div>
             </div>
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/6997/6997779.png"
-              className="secondImg"
+            <Lottie
+              className="secondAnimation"
+              animationData={secondAnimation}
+              loop={true}
             />
           </div>
           <div className="container3">
@@ -86,31 +93,33 @@ class HowItWorks extends Component {
               <div className="paragraph">
                 Step 3: Rate Entries & Brainstorm with Creatives
               </div>
-              <div className='subParagraph'><img
-                src="https://pngicon.ru/file/uploads/zelenaja-galochka.png"
-                className="checkMark"
-              ></img>
-              Provide instant feedback on Names
+              <div className="subParagraph">
+                <img
+                  src="https://art.kartinkof.club/uploads/posts/2023-07/thumbs/1689244855_art-kartinkof-club-p-idei-dlya-srisovki-galochka-86.png"
+                  className="checkMark"
+                ></img>
+                Provide instant feedback on Names
               </div>
               <div className="subParagraph">
                 <img
-                  src="https://pngicon.ru/file/uploads/zelenaja-galochka.png"
+                  src="https://art.kartinkof.club/uploads/posts/2023-07/thumbs/1689244855_art-kartinkof-club-p-idei-dlya-srisovki-galochka-86.png"
                   className="checkMark"
                 ></img>
                 Send private feedback or public messages to all creatives
               </div>
               <div className="subParagraph">
                 <img
-                  src="https://pngicon.ru/file/uploads/zelenaja-galochka.png"
+                  src="https://art.kartinkof.club/uploads/posts/2023-07/thumbs/1689244855_art-kartinkof-club-p-idei-dlya-srisovki-galochka-86.png"
                   className="checkMark"
                 ></img>
                 The more entries you rate - the submissions get better and
                 better
               </div>
             </div>
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/6997/6997779.png"
-              className="thirdImg"
+            <Lottie
+              className="thirdAnimation"
+              animationData={thirdAnimation}
+              loop={true}
             />
           </div>
         </body>
