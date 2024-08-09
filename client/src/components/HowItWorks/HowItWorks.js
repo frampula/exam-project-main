@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import Lottie from 'lottie-react';
+import firstImg from '../../window 1.json';
 
 class HowItWorks extends Component {
   render() {
@@ -35,11 +37,13 @@ class HowItWorks extends Component {
           <div className="container">
             <div className="step1">
               <div className="paragraph">Step 1: Launch a Naming Contest.</div>
-              <img
-                src="https://pngicon.ru/file/uploads/zelenaja-galochka.png"
-                className="checkMark"
-              ></img>
-              Start your project right with our proven Naming Brief template.
+              <div className="subParagraph">
+                <img
+                  src="https://pngicon.ru/file/uploads/zelenaja-galochka.png"
+                  className="checkMark"
+                ></img>
+                Start your project right with our proven Naming Brief template.
+              </div>
               <div className="subParagraph">
                 <img
                   src="https://pngicon.ru/file/uploads/zelenaja-galochka.png"
@@ -49,10 +53,8 @@ class HowItWorks extends Component {
                 project in order to get an awesome Name.
               </div>
             </div>
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/6997/6997779.png"
-              className="firstImg"
-            />
+            <Lottie className="firstImg" animationData={firstImg} loop={true} />
+            ;
           </div>
 
           <div className="container2">
@@ -60,11 +62,12 @@ class HowItWorks extends Component {
               <div className="paragraph">
                 Step 2: Ideas start pouring in within minutes
               </div>
-              <img
+              <div className='subParagraph'><img
                 src="https://pngicon.ru/file/uploads/zelenaja-galochka.png"
                 className="checkMark"
               ></img>
               100s of naming experts start submitting name ideas
+              </div>
               <div className="subParagraph">
                 <img
                   src="https://pngicon.ru/file/uploads/zelenaja-galochka.png"
@@ -83,11 +86,12 @@ class HowItWorks extends Component {
               <div className="paragraph">
                 Step 3: Rate Entries & Brainstorm with Creatives
               </div>
-              <img
+              <div className='subParagraph'><img
                 src="https://pngicon.ru/file/uploads/zelenaja-galochka.png"
                 className="checkMark"
               ></img>
               Provide instant feedback on Names
+              </div>
               <div className="subParagraph">
                 <img
                   src="https://pngicon.ru/file/uploads/zelenaja-galochka.png"
