@@ -5,6 +5,7 @@ import styles from './Header.module.sass';
 import CONSTANTS from '../../constants';
 import { clearUserStore } from '../../store/slices/userSlice';
 import { getUser } from '../../store/slices/userSlice';
+import HowItWorksStyle from '../HowItWorks/HowItWorks.css'
 
 class Header extends React.Component {
   componentDidMount() {
@@ -164,9 +165,11 @@ class Header extends React.Component {
                     alt="menu"
                   />
                   <ul>
+                  <Link to="/how-it-works" style={{ HowItWorksStyle }}>
                     <li>
-                      <a href="http://www.google.com">HOW IT WORKS</a>
+                      <a href=''>HOW IT WORKS</a>
                     </li>
+                    </Link>
                     <li>
                       <a href="http://www.google.com">PRICING</a>
                     </li>

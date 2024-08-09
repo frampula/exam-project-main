@@ -18,6 +18,7 @@ import ContestCreationPage from './pages/ContestCreation/ContestCreationPage';
 import CONSTANTS from './constants';
 import browserHistory from './browserHistory';
 import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatContainer';
+import HowItWorks from './components/HowItWorks/HowItWorks';
 
 class App extends Component {
   render () {
@@ -67,6 +68,11 @@ class App extends Component {
               contestType: CONSTANTS.TAGLINE_CONTEST,
               title: 'TAGLINE',
             })}
+          />
+          <Route
+          exact
+          path = "/how-it-works"
+          component={HowItWorks} 
           />
           <Route
             exact
