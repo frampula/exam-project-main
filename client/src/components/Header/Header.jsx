@@ -173,9 +173,11 @@ class Header extends React.Component {
                     <li>
                       <a href="http://www.google.com">PRICING</a>
                     </li>
+                    <Link to="/events">
                     <li>
-                      <a href="http://www.google.com">AGENCY SERVICE</a>
+                      <a href="http://www.google.com">UPCOMING EVENTS</a>
                     </li>
+                    </Link>
                     <li>
                       <a href="http://www.google.com">ACTIVE CONTESTS</a>
                     </li>

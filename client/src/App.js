@@ -19,6 +19,7 @@ import CONSTANTS from './constants';
 import browserHistory from './browserHistory';
 import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatContainer';
 import HowItWorks from './components/HowItWorks/HowItWorks';
+import Events from './components/Events/App';
 
 class App extends Component {
   render () {
@@ -73,6 +74,11 @@ class App extends Component {
           exact
           path = "/how-it-works"
           component={HowItWorks} 
+          />
+          <Route
+          exact
+          path = "/events"
+          component={Events} 
           />
           <Route
             exact
