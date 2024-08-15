@@ -13,16 +13,26 @@ const EventCountdown = () => {
     const newEvent = {
       ...values,
       countdown: moment(values.dateTime).diff(moment(), 'seconds'),
-      reminderCountdown: moment(values.reminderDateTime).diff(moment(), 'seconds'),
+      reminderCountdown: moment(values.reminderDateTime).diff(
+        moment(),
+        'seconds'
+      ),
     };
     setEvents([...events, newEvent]);
-    setReminders((prevReminders) => ({ ...prevReminders, [newEvent.event]: newEvent.reminderDateTime }));
+    setReminders((prevReminders) => ({
+      ...prevReminders,
+      [newEvent.event]: newEvent.reminderDateTime,
+    }));
   };
 
   const EventSchema = Yup.object().shape({
-    event: Yup.string().required('Required'),
-    dateTime: Yup.date().required('Required'),
-    reminderDateTime: Yup.date().required('Required'),
+    event: Yup.string().required('Event is required'),
+    dateTime: Yup.date().required('Date is required'),
+    reminderDateTime: Yup.date()
+      .required('Reminding is required')
+      .test('is-after-now', 'Reminder date invalid', function (value) {
+        return moment(value).isAfter(moment());
+      }),
   });
 
   useEffect(() => {
@@ -30,7 +40,9 @@ const EventCountdown = () => {
       setEvents((prevEvents) =>
         prevEvents.map((event) => {
           if (moment(event.dateTime).isAfter(moment())) {
-            const remainingTime = moment.duration(moment(event.dateTime).diff(moment()));
+            const remainingTime = moment.duration(
+              moment(event.dateTime).diff(moment())
+            );
             const days = Math.floor(remainingTime.asDays());
             const hours = remainingTime.hours();
             const minutes = remainingTime.minutes();
@@ -68,8 +80,20 @@ const EventCountdown = () => {
     const reminderInterval = setInterval(() => {
       Object.keys(reminders).forEach((event) => {
         if (moment(reminders[event]).isSameOrBefore(moment())) {
-          toast(`Reminder: ${event} is coming up!`);
-          setReminders((prevReminders) => ({ ...prevReminders, [event]: null }));
+          toast(`Reminder: ${event} is coming up!`, {
+            position: 'top-center',
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored'
+          });
+          setReminders((prevReminders) => ({
+            ...prevReminders,
+            [event]: null,
+          }));
         }
       });
     }, 1000);
@@ -87,31 +111,59 @@ const EventCountdown = () => {
       >
         <Form className="event-form">
           <div className="form-group">
-            <label htmlFor="event">Event:</label>
+            <label htmlFor="event" className="label">
+              Event:
+            </label>
             <Field type="text" name="event" className="form-control" />
-            <ErrorMessage name="event" component="div" className="error-message" />
+            <ErrorMessage
+              name="event"
+              component="div"
+              className="error-message"
+            />
           </div>
           <div className="form-group">
-            <label htmlFor="dateTime">Date and Time:</label>
-            <Field type="datetime-local" name="dateTime" className="form-control" />
-            <ErrorMessage name="dateTime" component="div" className="error-message" />
+            <label htmlFor="dateTime" className="label">
+              Date and Time:
+            </label>
+            <Field
+              type="datetime-local"
+              name="dateTime"
+              className="form-control"
+            />
+            <ErrorMessage
+              name="dateTime"
+              component="div"
+              className="error-message"
+            />
           </div>
           <div className="form-group">
-            <label htmlFor="reminderDateTime">Reminder Date and Time:</label>
-            <Field type="datetime-local" name="reminderDateTime" className="form-control" />
-            <ErrorMessage name="reminderDateTime" component="div" className="error-message" />
+            <label htmlFor="reminderDateTime" className="label">
+              Reminder Date:
+            </label>
+            <Field
+              type="datetime-local"
+              name="reminderDateTime"
+              className="form-control"
+            />
+            <ErrorMessage
+              name="reminderDateTime"
+              component="div"
+              className="error-message"
+            />
           </div>
-          <button type="submit" className="btn btn-primary">Add Event</button>
+          <button type="submit" className="btn btn-primary">
+            Add Event
+          </button>
         </Form>
       </Formik>
-      <h3>Upcoming Events:</h3>
+      <h3 className="h3">Upcoming Events:</h3>
       <ul className="event-list">
         {events.map((event) => (
           <li key={event.event} className="event-item">
-            {event.event} - 
+            {event.event} -{' '}
             {event.countdown && moment(event.dateTime).isAfter(moment()) && (
               <>
-                {event.countdown.days}d {event.countdown.hours}h 
+                {event.countdown.days}d {event.countdown.hours}h{' '}
                 {event.countdown.minutes}m {event.countdown.seconds}s
               </>
             )}
@@ -122,6 +174,7 @@ const EventCountdown = () => {
         ))}
       </ul>
     </div>
-  )};
-  
-  export default EventCountdown
+  );
+};
+
+export default EventCountdown;
