@@ -168,7 +168,7 @@ const EventCountdown = () => {
               </>
             )}
             {moment(event.dateTime).isBefore(moment()) && (
-              <span className="event-passed"> - Event has passed</span>
+              <span className="event-passed"> Event has passed</span>
             )}
           </li>
         ))}

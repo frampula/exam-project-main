@@ -8,8 +8,8 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: #27D2CF;
-    border: 1px solid #b8b8b8;
+    background-color: #cdb6ba;
+    border: 1px solid #ceadb3;
     border-radius: 25px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 800px;
@@ -27,8 +27,8 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: rgba(253, 141, 67, 0.932);
-    border: 1px solid #cfcfcf;
+    background-color: #f5deb3;
+    border: 1px solid #ddc393d8;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
@@ -46,7 +46,7 @@
     height: 35px;
     padding: 5px;
     font-size: 16px;
-    border: 1px solid #c0c0c0;
+    border: 1px solid #ddc393d8;
     border-radius: 10px;
   }
   
@@ -58,8 +58,8 @@
   }
   
   .btn {
-    background-color: #4CAF50;
-    color: #fff;
+    background-color: #6bd7bf;
+    color: rgb(71, 70, 70);
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -67,7 +67,7 @@
   }
   
   .btn:hover {
-    background-color: #3e8e41;
+    background-color: #59cab2;
   }
   
   .event-list {
@@ -82,17 +82,17 @@
   
   .event-item {
     padding: 10px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid rgb(85, 82, 82);
     font-family: "Montserrat", sans-serif;
   }
   
   .event-passed {
-    color: #999;
+    color: black;
     font-size: 14px;
   }
 
   .label {
-    padding-bottom: 5px;
+    padding-bottom: 4px;
   }
 
   .h3 {
