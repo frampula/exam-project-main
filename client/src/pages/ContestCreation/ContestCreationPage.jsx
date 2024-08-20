@@ -47,6 +47,7 @@ const ContestCreationPage = (props) => {
       </div>
       <div className={styles.container}>
         <div className={styles.formContainer}>
+        <h1 className='urlText'>{`Do you want a matching domain (.com URL) with your name?`}</h1>
           <ContestForm
             contestType={props.contestType}
             handleSubmit={handleSubmit}
