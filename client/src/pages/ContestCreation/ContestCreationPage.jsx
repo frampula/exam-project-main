@@ -8,6 +8,7 @@ import BackButton from '../../components/BackButton/BackButton';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
+import MatchingUrl from '../../components/ContestMatchingUrl/MatchingUrl'
 
 const ContestCreationPage = (props) => {
   const formRef = useRef();
@@ -46,8 +47,10 @@ const ContestCreationPage = (props) => {
         <ProgressBar currentStep={2} />
       </div>
       <div className={styles.container}>
+        <div>
+          <MatchingUrl />
+        </div>
         <div className={styles.formContainer}>
-        <h1 className='urlText'>{`Do you want a matching domain (.com URL) with your name?`}</h1>
           <ContestForm
             contestType={props.contestType}
             handleSubmit={handleSubmit}
