@@ -28,7 +28,7 @@ const types = [
 ];
 
 class CreatorDashboard extends React.Component {
-  renderSelectType = () => {
+  renderSelectType = (props) => {
     const array = [];
     const { creatorFilter } = this.props;
     types.forEach(
@@ -59,7 +59,7 @@ class CreatorDashboard extends React.Component {
   renderIndustryType = () => {
     const array = [];
     const { creatorFilter } = this.props;
-    const { industry } = this.props.dataForContest.data;
+    const  { industry } = this.props.dataForContest.data;
     array.push(
       <option key={0} value={null}>
         Choose industry

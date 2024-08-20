@@ -19,7 +19,7 @@ import CONSTANTS from './constants';
 import browserHistory from './browserHistory';
 import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatContainer';
 import HowItWorks from './components/HowItWorks/HowItWorks';
-import Events from './components/Events/App';
+import Events from './components/Events/EventCountdown';
 
 class App extends Component {
   render () {
@@ -73,12 +73,12 @@ class App extends Component {
           <Route
           exact
           path = "/how-it-works"
-          component={HowItWorks} 
+          component={PrivateHoc(HowItWorks)} 
           />
           <Route
           exact
           path = "/events"
-          component={Events} 
+          component={PrivateHoc(Events)} 
           />
           <Route
             exact
