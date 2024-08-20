@@ -5,7 +5,7 @@ import styles from './Header.module.sass';
 import CONSTANTS from '../../constants';
 import { clearUserStore } from '../../store/slices/userSlice';
 import { getUser } from '../../store/slices/userSlice';
-import HowItWorksStyle from '../HowItWorks/HowItWorks.css'
+import HowItWorksStyle from '../../pages/HowItWorks/HowItWorks.css'
 
 class Header extends React.Component {
   componentDidMount() {

@@ -18,8 +18,8 @@ import ContestCreationPage from './pages/ContestCreation/ContestCreationPage';
 import CONSTANTS from './constants';
 import browserHistory from './browserHistory';
 import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatContainer';
-import HowItWorks from './components/HowItWorks/HowItWorks';
-import Events from './components/Events/EventCountdown';
+import HowItWorks from './pages/HowItWorks/HowItWorks';
+import Events from './pages/Events/EventCountdown';
 
 class App extends Component {
   render () {

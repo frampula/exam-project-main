@@ -1,0 +1,26 @@
+.urlContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.urlText {
+    padding-right: 566px;
+    color: #585859;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.urlButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 1em;
+    max-width: 800px;
+}
+
+.urlButton {
+    border: 2px solid gray;
+    border-radius: 10px;
+    height: 70px;
+    width: 250px;
+}
