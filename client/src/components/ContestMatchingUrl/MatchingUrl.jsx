@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './MatchingUrl.css';
 
 const MatchingUrl = () => {
-  const [selectedButton, setSelectedButton] = useState(null);
+  const [selectedButton, setSelectedButton] = useState();
 
   const handleClick = (buttonNumber) => {
     setSelectedButton(buttonNumber);
@@ -20,10 +20,6 @@ const MatchingUrl = () => {
           className={`urlButton ${selectedButton === 1 ? 'selected' : ''}`}
           onClick={() => handleClick(1)}
         >
-          <img
-            className="urlImg"
-            src="https://cdn-icons-png.flaticon.com/512/403/403474.png"
-          />
           <div className={`answer ${selectedButton === 1 ? 'selected' : ''}`}>
             Yes
           </div>
@@ -35,10 +31,6 @@ const MatchingUrl = () => {
           className={`urlButton ${selectedButton === 2 ? 'selected' : ''}`}
           onClick={() => handleClick(2)}
         >
-          <img
-            className="urlImg"
-            src="https://cdn-icons-png.flaticon.com/512/403/403474.png"
-          />
           <div className={`answer ${selectedButton === 2 ? 'selected' : ''}`}>
             Yes
           </div>
@@ -50,10 +42,6 @@ const MatchingUrl = () => {
           className={`urlButton ${selectedButton === 3 ? 'selected' : ''}`}
           onClick={() => handleClick(3)}
         >
-          <img
-            className="urlImg"
-            src="https://cdn-icons-png.flaticon.com/512/403/403474.png"
-          />
           <div className={`answer ${selectedButton === 3 ? 'selected' : ''}`}>
             No
           </div>
