@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './MatchingUrl.css';
+import styles from './MatchingUrl.module.css';
 
 const MatchingUrl = () => {
   const [selectedButton, setSelectedButton] = useState();
@@ -10,42 +10,42 @@ const MatchingUrl = () => {
 
   return (
     <>
-      <span className="urlContainer">
-        <div className="urlText">
+      <span className={styles.urlContainer}>
+        <div className={styles.urlText}>
           Do you want a matching domain (.com URL) with your name?
         </div>
       </span>
-      <span className="urlButtonsContainer">
+      <span className={styles.urlButtonsContainer}>
         <div
-          className={`urlButton ${selectedButton === 1 ? 'selected' : ''}`}
+          className={`${styles.urlButton} ${selectedButton === 1 ? styles.selected : ''}`}
           onClick={() => handleClick(1)}
         >
-          <div className={`answer ${selectedButton === 1 ? 'selected' : ''}`}>
+          <div className={`${styles.answer} ${selectedButton === 1 ? styles.selected : ''}`}>
             Yes
           </div>
-          <span className="answerDescription">
+          <span className={styles.answerDescription}>
             but minor variations are allowed
           </span>
         </div>
         <div
-          className={`urlButton ${selectedButton === 2 ? 'selected' : ''}`}
+          className={`${styles.urlButton} ${selectedButton === 2 ? styles.selected : ''}`}
           onClick={() => handleClick(2)}
         >
-          <div className={`answer ${selectedButton === 2 ? 'selected' : ''}`}>
+          <div className={`${styles.answer} ${selectedButton === 2 ? styles.selected : ''}`}>
             Yes
           </div>
-          <span className="answerDescription">
+          <span className={styles.answerDescription}>
             The Domain should exactly match the name
           </span>
         </div>
         <div
-          className={`urlButton ${selectedButton === 3 ? 'selected' : ''}`}
+          className={`${styles.urlButton} ${selectedButton === 3 ? styles.selected : ''}`}
           onClick={() => handleClick(3)}
         >
-          <div className={`answer ${selectedButton === 3 ? 'selected' : ''}`}>
+          <div className={`${styles.answer} ${selectedButton === 3 ? styles.selected : ''}`}>
             No
           </div>
-          <span className="answerDescription">
+          <span className={styles.answerDescription}>
             I am only looking for a name, not a Domain
           </span>
         </div>
