@@ -3,7 +3,9 @@ import moment from 'moment';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
-import styles from './EventCountdown.css';
+import styles from './EventCountdown.module.css';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer'
 
 const EventCountdown = () => {
   const [events, setEvents] = useState([]);
@@ -102,64 +104,66 @@ const EventCountdown = () => {
   }, [reminders]);
 
   return (
-    <div className="event-countdown">
-      <h2 className="countdown-h2">Event Countdown</h2>
+    <>
+    <div className={styles.eventCountdown}>
+      <h2 className={styles.countdownH2}>Event Countdown</h2>
       <Formik
         initialValues={{ event: '', dateTime: '', reminderDateTime: '' }}
         validationSchema={EventSchema}
         onSubmit={handleSubmit}
       >
-        <Form className="event-form">
-          <div className="form-group">
-            <label htmlFor="event" className="label">
+        <Form className={styles.eventForm}>
+          <div className={styles.fieldBox}>
+            <label htmlFor="event">
               Event:
             </label>
-            <Field type="text" name="event" className="form-control" />
+            <Field type="text" name="event" className={styles.formControl} />
             <ErrorMessage
               name="event"
               component="div"
-              className="error-message"
+              className={styles.errorMessage}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="dateTime" className="label">
+          <div className={styles.fieldBox}>
+            <label htmlFor="dateTime">
               Date and Time:
             </label>
             <Field
               type="datetime-local"
               name="dateTime"
-              className="form-control"
+              className={styles.formControl}
             />
             <ErrorMessage
               name="dateTime"
               component="div"
-              className="error-message"
+              className={styles.errorMessage}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="reminderDateTime" className="label">
+          <div className={styles.fieldBox}>
+            <label htmlFor="reminderDateTime">
               Reminder Date:
             </label>
             <Field
               type="datetime-local"
               name="reminderDateTime"
-              className="form-control"
+              className={styles.formControl}
             />
             <ErrorMessage
               name="reminderDateTime"
               component="div"
-              className="error-message"
+              className={styles.errorMessage}
             />
           </div>
           <button type="submit" className="btn btn-primary">
+          {/* Как тут сделать через модуль */}
             Add Event
           </button>
         </Form>
       </Formik>
-      <h3 className="h3">Upcoming Events:</h3>
-      <ul className="event-list">
+      <h3>Upcoming Events:</h3>
+      <ul className={styles.eventList}>
         {events.map((event) => (
-          <li key={event.event} className="event-item">
+          <li key={event.event} className={styles.eventItem}>
             {event.event} -{' '}
             {event.countdown && moment(event.dateTime).isAfter(moment()) && (
               <>
@@ -168,12 +172,14 @@ const EventCountdown = () => {
               </>
             )}
             {moment(event.dateTime).isBefore(moment()) && (
-              <span className="event-passed"> Event has passed</span>
+              <span className={styles.eventPassed}> Event has passed</span>
             )}
           </li>
         ))}
       </ul>
     </div>
+    <Footer />
+    </>
   );
 };
 
