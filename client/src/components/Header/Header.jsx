@@ -8,11 +8,6 @@ import { getUser } from '../../store/slices/userSlice';
 import HowItWorksStyle from '../../pages/HowItWorks/HowItWorks.module.css'
 
 class Header extends React.Component {
-  componentDidMount() {
-    if (!this.props.data) {
-      this.props.getUser();
-    }
-  }
 
   logOut = () => {
     localStorage.clear();

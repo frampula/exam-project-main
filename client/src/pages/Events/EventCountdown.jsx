@@ -105,8 +105,9 @@ const EventCountdown = () => {
 
   return (
     <>
+    <Header />
     <div className={styles.eventCountdown}>
-      <h2 className={styles.countdownH2}>Event Countdown</h2>
+      <h2>Event Countdown</h2>
       <Formik
         initialValues={{ event: '', dateTime: '', reminderDateTime: '' }}
         validationSchema={EventSchema}
@@ -154,8 +155,7 @@ const EventCountdown = () => {
               className={styles.errorMessage}
             />
           </div>
-          <button type="submit" className="btn btn-primary">
-          {/* Как тут сделать через модуль */}
+          <button type="submit" className={styles.btn + " " + styles.btnPrimary}>
             Add Event
           </button>
         </Form>
