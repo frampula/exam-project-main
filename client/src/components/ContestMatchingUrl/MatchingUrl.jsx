@@ -21,7 +21,6 @@ const MatchingUrl = () => {
 
   const handleClick = (buttonNumber) => {
     setSelectedButton(buttonNumber);
-    console.log(buttonNumber);
   };
 
   return (
@@ -34,7 +33,6 @@ const MatchingUrl = () => {
       <div className="urlButtonsContainer">
         {MatchingUrlData.map((item, index) => (
           <MatchingUrlItem
-            id={index}
             isSelect={selectedButton === index}
             onClick={() => handleClick(index)}
             title={item.title}
@@ -46,8 +44,7 @@ const MatchingUrl = () => {
   );
 };
 
-const MatchingUrlItem = ({ onClick, isSelect, title, text, id }) => {
-  console.log(id);
+const MatchingUrlItem = ({ onClick, isSelect, title, text }) => {
   return (
     <>
       <div
