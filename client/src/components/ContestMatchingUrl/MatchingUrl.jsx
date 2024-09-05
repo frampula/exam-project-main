@@ -1,11 +1,27 @@
 import React, { useState } from 'react';
 import styles from './MatchingUrl.css';
 
+const MatchingUrlData = [
+  {
+    title: 'Yes',
+    text: 'But minor variations are allowed',
+  },
+  {
+    title: 'Yes',
+    text: 'The Domain should exactly match the name',
+  },
+  {
+    title: 'No',
+    text: 'I am only looking for a name, not a Domain',
+  },
+];
+
 const MatchingUrl = () => {
   const [selectedButton, setSelectedButton] = useState(null);
 
   const handleClick = (buttonNumber) => {
     setSelectedButton(buttonNumber);
+    console.log(buttonNumber);
   };
 
   return (
@@ -15,53 +31,36 @@ const MatchingUrl = () => {
           Do you want a matching domain (.com URL) with your name?
         </div>
       </span>
-      <span className="urlButtonsContainer">
-        <div
-          className={`urlButton ${selectedButton === 1 ? 'selected' : ''}`}
-          onClick={() => handleClick(1)}
-        >
-          <img
-            className="urlImg"
-            src="https://cdn-icons-png.flaticon.com/512/403/403474.png"
+      <div className="urlButtonsContainer">
+        {MatchingUrlData.map((item, index) => (
+          <MatchingUrlItem
+            id={index}
+            isSelect={selectedButton === index}
+            onClick={() => handleClick(index)}
+            title={item.title}
+            text={item.text}
           />
-          <div className={`answer ${selectedButton === 1 ? 'selected' : ''}`}>
-            Yes
-          </div>
-          <span className="answerDescription">
-            but minor variations are allowed
-          </span>
-        </div>
-        <div
-          className={`urlButton ${selectedButton === 2 ? 'selected' : ''}`}
-          onClick={() => handleClick(2)}
-        >
-          <img
-            className="urlImg"
-            src="https://cdn-icons-png.flaticon.com/512/403/403474.png"
-          />
-          <div className={`answer ${selectedButton === 2 ? 'selected' : ''}`}>
-            Yes
-          </div>
-          <span className="answerDescription">
-            The Domain should exactly match the name
-          </span>
-        </div>
-        <div
-          className={`urlButton ${selectedButton === 3 ? 'selected' : ''}`}
-          onClick={() => handleClick(3)}
-        >
-          <img
-            className="urlImg"
-            src="https://cdn-icons-png.flaticon.com/512/403/403474.png"
-          />
-          <div className={`answer ${selectedButton === 3 ? 'selected' : ''}`}>
-            No
-          </div>
-          <span className="answerDescription">
-            I am only looking for a name, not a Domain
-          </span>
-        </div>
-      </span>
+        ))}
+      </div>
+    </>
+  );
+};
+
+const MatchingUrlItem = ({ onClick, isSelect, title, text, id }) => {
+  console.log(id);
+  return (
+    <>
+      <div
+        className={`urlButton ${isSelect ? 'selected' : ''}`}
+        onClick={() => onClick()}
+      >
+        <img
+          className={`urlImg ${isSelect ? '' : 'hidden'}`}
+          src="https://cdn-icons-png.flaticon.com/512/403/403474.png"
+        />
+        <div className={`answer ${isSelect ? 'selected' : ''}`}>{title}</div>
+        <span className="answerDescription">{text}</span>
+      </div>
     </>
   );
 };
