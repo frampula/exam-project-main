@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Lottie from 'lottie-react';
 import { connect } from 'react-redux';
 import styles from './HowItWorks.module.css';
-import secondAnimation from '../../SecondAnimation.json';
-import thirdAnimation from '../../thirdAnimation.json';
+import launchAnimation from './LaunchAnimation.json'
+import IdeasAnimation from './IdeasAnimation.json';
+import RatingAnimation from './RatingAnimation.json';
 import Header from '../../components/Header/Header.jsx';
 import CONSTANTS from '../../constants.js';
 
@@ -65,7 +66,7 @@ const HowItWorks = () => {
           </div>
           <Lottie
             className={styles.launchAnimation}
-            animationData={CONSTANTS.STATIC_IMAGES_PATH.LaunchAnimation}
+            animationData={launchAnimation}
             // 123123123
             loop={true}
           />
@@ -95,7 +96,7 @@ const HowItWorks = () => {
           </div>
           <Lottie
             className={styles.ideasAnimation}
-            animationData={CONSTANTS.ANIMATIONS_PATH.IdeasAnimation}
+            animationData={IdeasAnimation}
             loop={true}
           />
         </div>
@@ -131,7 +132,7 @@ const HowItWorks = () => {
           </div>
           <Lottie
             className={styles.ratingAnimation}
-            animationData={CONSTANTS.STATIC_IMAGES_PATH.RatingAnimation}
+            animationData={RatingAnimation}
             loop={true}
           />
         </div>
