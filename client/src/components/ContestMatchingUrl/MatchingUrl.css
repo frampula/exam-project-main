@@ -19,6 +19,8 @@
 }
 
 .urlButton {
+    position: relative;
+    cursor: pointer;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -49,7 +51,14 @@
 }
 
 .urlImg {
+    position: absolute;
+    right: 10px;
+    top: 10px;
     max-width: 15px;
     max-height: 15px;
     align-items: end;
+}
+
+.hidden {
+    opacity: 0;
 }
