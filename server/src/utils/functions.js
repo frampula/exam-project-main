@@ -31,6 +31,21 @@ module.exports.createWhereForAllContests = (
   return object;
 };
 
+module.exports.createWhereForAllOffers = (awardSort, where) => {
+  const object = {
+    where: {},
+    order: [],
+  };
+
+  if (awardSort) {
+    object.order.push([awardSort]);
+  }
+
+  Object.assign(object.where, where);
+  object.order.push(['id', 'desc']);
+  return object;
+};
+
 function getPredicateTypes (index) {
   return { [ bd.Sequelize.Op.or ]: [types[ index ].split(',')] };
 }
