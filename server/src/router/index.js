@@ -3,6 +3,7 @@ const basicMiddlewares = require('../middlewares/basicMiddlewares');
 const hashPass = require('../middlewares/hashPassMiddle');
 const userController = require('../controllers/userController');
 const contestController = require('../controllers/contestController');
+const offersController = require('../controllers/offersController');
 const checkToken = require('../middlewares/checkToken');
 const validators = require('../middlewares/validators');
 const chatController = require('../controllers/chatController');
@@ -81,14 +82,35 @@ router.post(
   checkToken.checkToken,
   upload.uploadLogoFiles,
   basicMiddlewares.canSendOffer,
-  contestController.setNewOffer,
+  offersController.setNewOffer,
 );
 
 router.post(
   '/setOfferStatus',
   checkToken.checkToken,
   basicMiddlewares.onlyForCustomerWhoCreateContest,
-  contestController.setOfferStatus,
+  offersController.setOfferStatus,
+);
+
+router.get(
+  '/getOffers',
+  checkToken.checkToken,
+  basicMiddlewares.onlyForModerator,
+  offersController.getOffers,
+);
+
+router.post(
+  '/approveOffer',
+  checkToken.checkToken,
+  basicMiddlewares.onlyForModerator,
+  offersController.approveOfferByModerator,
+);
+
+router.post(
+  '/rejectOffer',
+  checkToken.checkToken,
+  basicMiddlewares.onlyForModerator,
+  offersController.rejectOfferByModerator,
 );
 
 router.post(
