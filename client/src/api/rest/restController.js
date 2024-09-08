@@ -55,6 +55,24 @@ export const getActiveContests = ({
     ownEntries,
   });
 
+export const getOffers = ({
+  offset,
+  limit,
+  awardSort,
+  where,
+}) =>
+  http.get('getOffers', {
+    params: {
+      offset,
+      limit,
+      awardSort,
+      where,
+    }
+  });
+
+export const rejectOffer = data => http.post('rejectOffer', data);
+export const approveOffer = data => http.post('approveOffer', data);
+
 export const getContestById = data =>
   http.get('getContestById', {
     headers: {
