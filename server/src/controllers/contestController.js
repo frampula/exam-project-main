@@ -61,7 +61,7 @@ module.exports.getContestById = async (req, res, next) => {
           required: false,
           where: req.tokenData.role === CONSTANTS.CREATOR
             ? { userId: req.tokenData.userId }
-            : {},
+            : { status: { [ db.Sequelize.Op.notIn ]: [CONSTANTS.OFFER_STATUS_ON_MODERATION, CONSTANTS.OFFER_STATUS_REJECTED_BY_MODERATOR] } },
           attributes: { exclude: ['userId', 'contestId'] },
           include: [
             {
@@ -271,3 +271,4 @@ module.exports.getContests = (req, res, next) => {
       next(new ServerError());
     });
 };
+
