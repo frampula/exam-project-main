@@ -52,8 +52,16 @@ module.exports.onlyForCreative = (req, res, next) => {
 };
 
 module.exports.onlyForCustomer = (req, res, next) => {
-  if (req.tokenData.role === CONSTANTS.CREATOR) {
+  if (req.tokenData.role !== CONSTANTS.CUSTOMER) {
     return next(new RightsError('this page only for customers'));
+  } else {
+    next();
+  }
+};
+
+module.exports.onlyForModerator = (req, res, next) => {
+  if (req.tokenData.role !== CONSTANTS.MODERATOR) {
+    return next(new RightsError('this page only for moderator'));
   } else {
     next();
   }
