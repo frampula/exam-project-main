@@ -6,8 +6,10 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
 import Payment from './pages/Payment/Payment';
 import StartContestPage from './pages/StartContestPage/StartContestPage';
+import StartReviewPage from './pages/StartReviewPage/StartReviewPage';
 import Dashboard from './pages/Dashboard/Dashboard';
 import PrivateHoc from './components/PrivateHoc/PrivateHoc';
+import RoleHoc from './components/RoleHoc/RoleHoc';
 import NotFound from './components/NotFound/NotFound';
 import Home from './pages/Home/Home';
 import OnlyNotAuthorizedUserHoc from './components/OnlyNotAuthorizedUserHoc/OnlyNotAuthorizedUserHoc';
@@ -51,6 +53,11 @@ class App extends Component {
             exact
             path='/startContest'
             component={PrivateHoc(StartContestPage)}
+          />
+          <Route
+            exact
+            path='/startReview'
+            component={PrivateHoc(RoleHoc(StartReviewPage, CONSTANTS.MODERATOR))}
           />
           <Route
             exact
