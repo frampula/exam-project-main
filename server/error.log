@@ -1,0 +1,10 @@
+{"message":"","time":1727370993736,"code":"No code","stackTrace":{}}
+{"message":"","time":1727371048763,"code":"No code","stackTrace":{}}
+{"message":"","time":1727371048916,"code":"No code","stackTrace":{}}
+{"message":"","time":1727371175479,"code":"No code","stackTrace":{}}
+{"message":"","time":1727371473598,"code":"No code","stackTrace":{}}
+{"message":"","time":1727371474000,"code":"No code","stackTrace":{}}
+{"message":"","time":1727371612261,"code":"No code","stackTrace":{}}
+{"message":"","time":1727371649939,"code":"No code","stackTrace":{}}
+{"message":"","time":1727371661407,"code":"No code","stackTrace":{}}
+{"message":"������������ \"postgres\" �� ������ �������� ����������� (�� ������)","time":1727371684357,"code":"No code","stackTrace":"SequelizeConnectionError: ������������ \"postgres\" �� ������ �������� ����������� (�� ������)\n    at Client._connectionCallback (C:\\Users\\Mark\\Desktop\\exam-project-main\\server\\node_modules\\sequelize\\lib\\dialects\\postgres\\connection-manager.js:143:24)\n    at Client._handleErrorWhileConnecting (C:\\Users\\Mark\\Desktop\\exam-project-main\\server\\node_modules\\pg\\lib\\client.js:327:19)\n    at Client._handleErrorMessage (C:\\Users\\Mark\\Desktop\\exam-project-main\\server\\node_modules\\pg\\lib\\client.js:347:19)\n    at Connection.emit (node:events:517:28)\n    at C:\\Users\\Mark\\Desktop\\exam-project-main\\server\\node_modules\\pg\\lib\\connection.js:117:12\n    at Parser.parse (C:\\Users\\Mark\\Desktop\\exam-project-main\\server\\node_modules\\pg-protocol\\dist\\parser.js:40:17)\n    at Socket.<anonymous> (C:\\Users\\Mark\\Desktop\\exam-project-main\\server\\node_modules\\pg-protocol\\dist\\index.js:11:42)\n    at Socket.emit (node:events:517:28)\n    at addChunk (node:internal/streams/readable:368:12)\n    at readableAddChunk (node:internal/streams/readable:341:9)"}
