@@ -18,6 +18,12 @@ router.post(
 );
 
 router.post(
+  '/test',
+  checkToken.checkToken,
+  chatController.createCatalog,
+)
+
+router.post(
   '/login',
   validators.validateLogin,
   userController.login,
@@ -135,66 +141,66 @@ router.post(
 );
 
 router.post(
-  '/newMessage',
+  '/newMessage', 
   checkToken.checkToken,
   chatController.addMessage,
 );
 
 router.post(
-  '/getChat',
+  '/getChat', 
   checkToken.checkToken,
   chatController.getChat,
 );
 
 router.post(
-  '/getPreview',
+  '/getPreview', 
   checkToken.checkToken,
   chatController.getPreview,
 );
 
 router.post(
-  '/blackList',
+  '/blackList', 
   checkToken.checkToken,
   chatController.blackList,
 );
 
 router.post(
-  '/favorite',
+  '/favorite', 
   checkToken.checkToken,
   chatController.favoriteChat,
 );
 
-router.post(
+router.post( 
   '/createCatalog',
   checkToken.checkToken,
   chatController.createCatalog,
 );
 
-router.post(
+router.post( 
   '/updateNameCatalog',
   checkToken.checkToken,
   chatController.updateNameCatalog,
 );
 
-router.post(
+router.post( 
   '/addNewChatToCatalog',
   checkToken.checkToken,
   chatController.addNewChatToCatalog,
 );
 
-router.post(
+router.post( 
   '/removeChatFromCatalog',
   checkToken.checkToken,
   chatController.removeChatFromCatalog,
 );
 
-router.post(
+router.post( 
   '/deleteCatalog',
   checkToken.checkToken,
   chatController.deleteCatalog,
 );
 
-router.post(
+router.post( 
   '/getCatalogs',
   checkToken.checkToken,
   chatController.getCatalogs,

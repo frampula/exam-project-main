@@ -42,7 +42,7 @@ const DialogBox = props => {
     >
       <img
         src={
-          interlocutor.avatar === 'anon.png'
+          interlocutor?.avatar === 'anon.png'
             ? CONSTANTS.ANONYM_IMAGE_PATH
             : `${CONSTANTS.publicURL}${interlocutor.avatar}`
         }

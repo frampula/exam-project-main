@@ -1,28 +1,22 @@
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define(
-    'Messages',
-    {
-      sender: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      body: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      conversationId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Сonversations',
-          key: 'id',
-        },
-      },
+  const Messages = sequelize.define('Messages', {
+    sender: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
-    {
-      sequelize,
-      modelName: 'Messages',
-      timestamps: true,
-    }
-  );
+    body: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    conversationId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+  });
+
+  Messages.associate = function(models) {
+    Messages.belongsTo(models.Conversations, { foreignKey: 'conversationId' });
+  };
+
+  return Messages;
 };

@@ -30,7 +30,7 @@ const DialogList = (props) => {
   const onlyFavoriteDialogs = (chatPreview, userId) =>
     chatPreview.favoriteList[chatPreview.participants.indexOf(userId)];
 
-  const onlyBlockDialogs = (chatPreview, userId) =>
+  const onlyBlockDialogs = (chatPreview, userId) => 
     chatPreview.blackList[chatPreview.participants.indexOf(userId)];
 
   const getTimeStr = (time) => {
@@ -65,7 +65,7 @@ const DialogList = (props) => {
           catalogOperation={
             chatMode === CONSTANTS.CATALOG_PREVIEW_CHAT_MODE
               ? removeChat
-              : changeShowCatalogCreation
+              : changeShowCatalogCreation 
           }
           goToExpandedDialog={goToExpandedDialog}
         />

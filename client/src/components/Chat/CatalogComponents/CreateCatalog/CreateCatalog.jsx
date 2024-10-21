@@ -11,6 +11,7 @@ const CreateCatalog = (props) => {
     const { createCatalog } = props;
     const { addChatId } = props;
     createCatalog({ catalogName: values.catalogName, chatId: addChatId });
+    console.log(props.chatId);
   };
   return (
     <Formik

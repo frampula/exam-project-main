@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('Conversations', {
+  const Conversations = sequelize.define('Conversations', {
     participants: {
       type: DataTypes.ARRAY(DataTypes.INTEGER),
       allowNull: false,
@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ARRAY(DataTypes.BOOLEAN),
       allowNull: false,
     },
-  },
-  {
-    sequelize,
-    modelName: 'Conversations',
-    timestamps: true, 
-  }
-);
-}
+  });
+
+  Conversations.associate = function(models) {
+    Conversations.hasMany(models.Messages, { foreignKey: 'conversationId' });
+  };
+
+  return Conversations;
+};
