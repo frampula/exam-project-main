@@ -90,6 +90,15 @@ class ContestPage extends React.Component {
     const { messagesPreview } = this.props.chatStore;
     const { id } = this.props.userStore.data;
     const participants = [id, interlocutorId];
+    console.log(this.props.userStore, this.props.chatStore);
+    if (this.props.chatStore.messagesPreview.length === 0) {
+    return {
+      participants,
+      _id: interlocutorId,
+      blackList: [],
+      favoriteList: [],
+    }
+  }
     participants.sort(
       (participant1, participant2) => participant1 - participant2
     );
@@ -108,6 +117,7 @@ class ContestPage extends React.Component {
 
   goChat = () => {
     const { User } = this.props.contestByIdStore.contestData;
+    console.log(User);
     this.props.goToExpandedDialog({
       interlocutor: User,
       conversationData: this.findConversationInfo(User.id),

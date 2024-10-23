@@ -25,6 +25,8 @@ const DialogBox = props => {
   } = chatPreview;
   const isFavorite = favoriteList[participants.indexOf(userId)];
   const isBlocked = blackList[participants.indexOf(userId)];
+  console.log(interlocutor);
+  console.log(CONSTANTS.ANONYM_IMAGE_PATH);
   return (
     <div
       className={styles.previewChatBox}
@@ -42,16 +44,16 @@ const DialogBox = props => {
     >
       <img
         src={
-          interlocutor?.avatar === 'anon.png'
+          (interlocutor?.avatar === 'anon.png' || !interlocutor)
             ? CONSTANTS.ANONYM_IMAGE_PATH
-            : `${CONSTANTS.publicURL}${interlocutor.avatar}`
+            : `${CONSTANTS.publicURL}${interlocutor?.avatar}`
         }
         alt='user'
       />
       <div className={styles.infoContainer}>
         <div className={styles.interlocutorInfo}>
           <span className={styles.interlocutorName}>
-            {interlocutor.firstName}
+            {interlocutor?.firstName}
           </span>
           <span className={styles.interlocutorMessage}>{text}</span>
         </div>
