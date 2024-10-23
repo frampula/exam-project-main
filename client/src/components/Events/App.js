@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Header from '../Header/Header'
 import moment from 'moment';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
-import styles from './EventCountdown.css';
+import 'react-toastify/dist/ReactToastify.css';
+import './EventCountdown.css'; 
 
 const EventCountdown = () => {
   const [events, setEvents] = useState([]);
@@ -12,11 +14,10 @@ const EventCountdown = () => {
   const handleSubmit = (values) => {
     const newEvent = {
       ...values,
+      createdAt: moment(),
+      totalDuration: moment(values.dateTime).diff(moment(), 'seconds'),
       countdown: moment(values.dateTime).diff(moment(), 'seconds'),
-      reminderCountdown: moment(values.reminderDateTime).diff(
-        moment(),
-        'seconds'
-      ),
+      reminderCountdown: moment(values.reminderDateTime).diff(moment(), 'seconds'),
     };
     setEvents([...events, newEvent]);
     setReminders((prevReminders) => ({
@@ -39,21 +40,23 @@ const EventCountdown = () => {
     const interval = setInterval(() => {
       setEvents((prevEvents) =>
         prevEvents.map((event) => {
-          if (moment(event.dateTime).isAfter(moment())) {
-            const remainingTime = moment.duration(
-              moment(event.dateTime).diff(moment())
-            );
-            const days = Math.floor(remainingTime.asDays());
-            const hours = remainingTime.hours();
-            const minutes = remainingTime.minutes();
-            const seconds = remainingTime.seconds();
+          const remainingTime = moment(event.dateTime).diff(moment(), 'seconds');
+          const totalDuration = moment(event.dateTime).diff(event.createdAt, 'seconds');
+
+          if (remainingTime > 0) {
+            const percentRemaining = ((totalDuration - remainingTime) / totalDuration) * 100;
 
             return {
               ...event,
-              countdown: { days, hours, minutes, seconds },
+              countdown: remainingTime,
+              progress: percentRemaining,
             };
           } else {
-            return event;
+            return {
+              ...event,
+              countdown: 0,
+              progress: 100,
+            };
           }
         })
       );
@@ -61,20 +64,6 @@ const EventCountdown = () => {
 
     return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {
-    setEvents((prevEvents) =>
-      prevEvents.sort((a, b) => {
-        if (moment(a.dateTime).isBefore(moment(b.dateTime))) {
-          return -1;
-        } else if (moment(a.dateTime).isAfter(moment(b.dateTime))) {
-          return 1;
-        } else {
-          return 0;
-        }
-      })
-    );
-  }, [events]);
 
   useEffect(() => {
     const reminderInterval = setInterval(() => {
@@ -88,7 +77,7 @@ const EventCountdown = () => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: 'colored'
+            theme: 'colored',
           });
           setReminders((prevReminders) => ({
             ...prevReminders,
@@ -102,6 +91,8 @@ const EventCountdown = () => {
   }, [reminders]);
 
   return (
+    <>
+    <Header />
     <div className="event-countdown">
       <h2 className="countdown-h2">Event Countdown</h2>
       <Formik
@@ -156,24 +147,27 @@ const EventCountdown = () => {
           </button>
         </Form>
       </Formik>
+
       <h3 className="h3">Upcoming Events:</h3>
       <ul className="event-list">
         {events.map((event) => (
           <li key={event.event} className="event-item">
-            {event.event} -{' '}
-            {event.countdown && moment(event.dateTime).isAfter(moment()) && (
-              <>
-                {event.countdown.days}d {event.countdown.hours}h{' '}
-                {event.countdown.minutes}m {event.countdown.seconds}s
-              </>
-            )}
-            {moment(event.dateTime).isBefore(moment()) && (
-              <span className="event-passed"> Event has passed</span>
-            )}
+            <div className="event-details">
+              <span>{event.event}</span>
+              {event.countdown > 0 && (
+                <progress value={event.progress} max="100">
+                  {event.progress}%
+                </progress>
+              )}
+              {event.countdown === 0 && (
+                <span className="event-passed"> Event has passed</span>
+              )}
+            </div>
           </li>
         ))}
       </ul>
     </div>
+    </>
   );
 };
 
