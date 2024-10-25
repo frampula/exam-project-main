@@ -18,7 +18,7 @@ export default {
   ANONYM_IMAGE_PATH: '/staticImages/anonym.png',
   BASE_URL: `http://${serverIP}:${serverPort}/`,
   ACCESS_TOKEN: 'accessToken',
-  publicURL:
+  PUBLIC_URL:
     env === 'production'
       ? `http://${serverIP}:80/images/`
       : `http://${serverIP}:${serverPort}/public/images/`,

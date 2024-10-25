@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Formik } from 'formik';
+import { Form, Formik, Field } from 'formik';
 import { connect } from 'react-redux';
 import { clearUserError } from '../../store/slices/userSlice';
 import styles from './UpdateUserInfoForm.module.sass';
@@ -66,14 +66,7 @@ const UpdateUserInfoForm = props => {
             }}
           />
         </div>
-        <ImageUpload
-          name='file'
-          classes={{
-            uploadContainer: styles.imageUploadContainer,
-            inputContainer: styles.uploadInputContainer,
-            imgStyle: styles.imgStyle,
-          }}
-        />
+        <Field name="file" component={ImageUpload} />
         <button type='submit' disabled={submitting}>
           Submit
         </button>
