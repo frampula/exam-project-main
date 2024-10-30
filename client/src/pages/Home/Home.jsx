@@ -25,7 +25,7 @@ const Home = props => {
     };
   });
 
-  const { isFetching } = props;
+  const { isFetching, data } = props;
   const text =
     CONSTANTS.HEADER_ANIMATION_TEXT[
       index % CONSTANTS.HEADER_ANIMATION_TEXT.length
@@ -50,7 +50,7 @@ const Home = props => {
                 for immediate purchase
               </p>
               <div className={styles.button}>
-                <Link className={styles.button__link} to='/dashboard'>
+                <Link className={styles.button__link} to={data ? '/dashboard' : '/login'} >
                   DASHBOARD
                 </Link>
               </div>
@@ -246,7 +246,7 @@ const Home = props => {
               carouselType={carouselConstants.EXAMPLE_SLIDER}
             />
             <div className={styles.button}>
-              <Link className={styles.button__link} to='/dashboard'>
+              <Link className={styles.button__link} to={data ? '/dashboard' : '/login'}>
                 DASHBOARD
               </Link>
             </div>
@@ -266,8 +266,8 @@ const Home = props => {
 };
 
 const mapStateToProps = state => {
-  const { isFetching } = state.userStore;
-  return { isFetching };
+  const { isFetching, data } = state.userStore;
+  return { isFetching, data };
 };
 
 export default connect(mapStateToProps, null)(Home);

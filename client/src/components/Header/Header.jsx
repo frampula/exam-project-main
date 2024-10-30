@@ -5,13 +5,9 @@ import styles from './Header.module.sass';
 import CONSTANTS from '../../constants';
 import { clearUserStore } from '../../store/slices/userSlice';
 import { getUser } from '../../store/slices/userSlice';
+import HowItWorksStyle from '../../pages/HowItWorks/HowItWorks.module.css'
 
 class Header extends React.Component {
-  componentDidMount() {
-    if (!this.props.data) {
-      this.props.getUser();
-    }
-  }
 
   logOut = () => {
     localStorage.clear();
@@ -36,7 +32,7 @@ class Header extends React.Component {
               src={
                 this.props.data.avatar === 'anon.png'
                   ? CONSTANTS.ANONYM_IMAGE_PATH
-                  : `${CONSTANTS.publicURL}${this.props.data.avatar}`
+                  : `${CONSTANTS.PUBLIC_URL}${this.props.data.avatar}`
               }
               alt="user"
             />
@@ -129,54 +125,58 @@ class Header extends React.Component {
             <div className={styles.nav}>
               <ul>
                 <li>
-                  <span>NAME IDEAS</span>
+                  <span>Name Ideas</span>
                   <img
                     src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
                     alt="menu"
                   />
                   <ul>
                     <li>
-                      <a href="http://www.google.com">Beauty</a>
+                      <a href="http://www.google.com">BEAUTY</a>
                     </li>
                     <li>
-                      <a href="http://www.google.com">Consulting</a>
+                      <a href="http://www.google.com">CONSULTING</a>
                     </li>
                     <li>
-                      <a href="http://www.google.com">E-Commerce</a>
+                      <a href="http://www.google.com">E-COMMERCE</a>
                     </li>
                     <li>
-                      <a href="http://www.google.com">Fashion & Clothing</a>
+                      <a href="http://www.google.com">FASHION & CLOTHING</a>
                     </li>
                     <li>
-                      <a href="http://www.google.com">Finance</a>
+                      <a href="http://www.google.com">FINANCE</a>
                     </li>
                     <li>
-                      <a href="http://www.google.com">Real Estate</a>
+                      <a href="http://www.google.com">REAL ESTATE</a>
                     </li>
                     <li>
-                      <a href="http://www.google.com">Tech</a>
+                      <a href="http://www.google.com">TECH</a>
                     </li>
                     <li className={styles.last}>
-                      <a href="http://www.google.com">More Categories</a>
+                      <a href="http://www.google.com">MORE CATEGORIES</a>
                     </li>
                   </ul>
                 </li>
                 <li>
-                  <span>CONTESTS</span>
+                  <span>Contests</span>
                   <img
                     src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
                     alt="menu"
                   />
                   <ul>
+                  <Link to="/how-it-works" style={{ HowItWorksStyle }}>
                     <li>
-                      <a href="http://www.google.com">HOW IT WORKS</a>
+                      <a href=''>HOW IT WORKS</a>
                     </li>
+                    </Link>
                     <li>
                       <a href="http://www.google.com">PRICING</a>
                     </li>
+                    <Link to="/events">
                     <li>
-                      <a href="http://www.google.com">AGENCY SERVICE</a>
+                      <a href="http://www.google.com">UPCOMING EVENTS</a>
                     </li>
+                    </Link>
                     <li>
                       <a href="http://www.google.com">ACTIVE CONTESTS</a>
                     </li>

@@ -17,10 +17,11 @@ export default {
   OFFER_STATUS_ON_MODERATION: 'on_moderation',
   OFFER_STATUS_REJECTED_BY_MODERATOR: 'rejected_by_moderator',
   STATIC_IMAGES_PATH: '/staticImages/',
+  ANIMATIONS_PATH: '/animations/',
   ANONYM_IMAGE_PATH: '/staticImages/anonym.png',
   BASE_URL: `http://${serverIP}:${serverPort}/`,
   ACCESS_TOKEN: 'accessToken',
-  publicURL:
+  PUBLIC_URL:
     env === 'production'
       ? `http://${serverIP}:80/images/`
       : `http://${serverIP}:${serverPort}/public/images/`,
