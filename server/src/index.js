@@ -7,6 +7,7 @@ require('./dbMongo/mongoose');
 const router = require('./router');
 const controller = require('./socketInit');
 const handlerError = require('./handlerError/handler');
+require('./utils/loggerChronJobs')
 
 const PORT = 5001;
 const app = express();
