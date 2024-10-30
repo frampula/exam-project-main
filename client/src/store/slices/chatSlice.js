@@ -87,7 +87,7 @@ const sendMessageExtraReducers = createExtraReducers({
     const { messagesPreview } = state;
     let isNew = true;
     messagesPreview.forEach(preview => {
-      if (isEqual(preview.participants, payload.message.participants)) {
+      if (isEqual(preview.participants, payload.preview.participants)) {
         preview.text = payload.message.body;
         preview.sender = payload.message.sender;
         preview.createAt = payload.message.createdAt;
@@ -324,6 +324,7 @@ const reducers = {
     const { message, preview } = payload;
     const { messagesPreview } = state;
     let isNew = true;
+    console.log(messagesPreview);
     messagesPreview.forEach(preview => {
       if (isEqual(preview.participants, message.participants)) {
         preview.text = message.body;

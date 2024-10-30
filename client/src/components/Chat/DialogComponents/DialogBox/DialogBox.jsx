@@ -42,7 +42,7 @@ const DialogBox = props => {
     >
       <img
         src={
-          interlocutor.avatar === 'anon.png'
+          (interlocutor?.avatar === 'anon.png' || !interlocutor)
             ? CONSTANTS.ANONYM_IMAGE_PATH
             : `${CONSTANTS.PUBLIC_URL}${interlocutor.avatar}`
         }
@@ -51,7 +51,7 @@ const DialogBox = props => {
       <div className={styles.infoContainer}>
         <div className={styles.interlocutorInfo}>
           <span className={styles.interlocutorName}>
-            {interlocutor.firstName}
+            {interlocutor?.firstName}
           </span>
           <span className={styles.interlocutorMessage}>{text}</span>
         </div>

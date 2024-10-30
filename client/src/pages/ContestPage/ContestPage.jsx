@@ -90,6 +90,14 @@ class ContestPage extends React.Component {
     const { messagesPreview } = this.props.chatStore;
     const { id } = this.props.userStore.data;
     const participants = [id, interlocutorId];
+    if (this.props.chatStore.messagesPreview.length === 0) {
+    return {
+      participants,
+      _id: interlocutorId,
+      blackList: [],
+      favoriteList: [],
+    }
+  }
     participants.sort(
       (participant1, participant2) => participant1 - participant2
     );
