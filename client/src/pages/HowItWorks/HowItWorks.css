@@ -1,0 +1,143 @@
+*{
+  text-decoration: none;
+}
+
+.header {
+  padding-top: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 1em;
+  background-color: rgba(241, 241, 241, 0.705);
+  height: 200px;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.container {
+  padding-top: 1em;
+  display: flex;
+  align-items: center;
+  height: 600px;
+}
+
+
+.container2 {
+  padding-top: 1em;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  background-color: #27D2CF;
+  height: 600px;
+  color: rgb(248, 246, 240);
+}
+
+.container3 {
+  padding-top: 1em;
+  display: flex;
+  align-items: center;
+  height: 600px;
+}
+
+.tagline {
+  font-weight: 400;
+  font-size: 30px;
+  padding-top: 0.30em;
+}
+
+.taglineSupport {
+  color: #000;
+  font-weight: 900;
+  font-size: 35px;
+  padding-top: 0.40em;
+}
+
+.firstAnimation {
+  margin-left: auto;
+  max-height: 700px;
+  max-width: 700px;
+  padding-right: 16em;
+  padding-top: 1em;
+  padding-bottom: 5em;
+}
+
+.secondAnimation {
+  margin-right: auto;
+  max-height: 700px;
+  max-width: 700px;
+  padding-left: 17em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.thirdAnimation {
+  margin-left: auto;
+  max-height: 700px;
+  max-width: 700px;
+  padding-right: 15em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.step1 {
+  font-size: 20px;
+  max-width: 400px;
+  padding-left: 12em;
+}
+
+.step2 {
+  font-size: 20px;
+  max-width: 400px;
+  padding-right: 15em;
+}
+
+.step3 {
+  font-size: 20px;
+  max-width: 400px;
+  padding-left: 15em;
+}
+
+.paragraph {
+  padding-bottom: 8px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.subParagraph {
+  font-weight: 400;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  padding-bottom: 8px;
+}
+
+.lottie {
+  max-width: 50px;
+  max-height: 50px;
+  padding-left: 1px;
+}
+
+.sponsors {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-top: 1.5em;
+}
+
+.img {
+  max-width: 90px;
+  max-height: 90px;
+  padding: 0px 90px 0px 90px;
+}
+
+#bugatti {
+  max-width: 80px;
+  max-height: 80px;
+  padding: 0px 90px 0px 90px;
+}
+
+.checkMark {
+  max-width: 30px;
+  max-height: 23px;
+  padding-right: 5px;
+}

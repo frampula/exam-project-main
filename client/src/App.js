@@ -78,6 +78,16 @@ class App extends Component {
             })}
           />
           <Route
+          exact
+          path = "/how-it-works"
+          component={PrivateHoc(HowItWorks)} 
+          />
+          <Route
+          exact
+          path = "/events"
+          component={PrivateHoc(Events)} 
+          />
+          <Route
             exact
             path="/how-it-works"
             component={PrivateHoc(HowItWorks)}
