@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import * as restController from '../../api/rest/restController';
 import { decorateAsyncThunk, pendingReducer } from '../../utils/store';
+import CONSTANTS from '../../constants';
 
 const OFFERS_SLICE_NAME = 'offers';
 
@@ -12,12 +13,13 @@ const initialState = {
     awardSort: 'asc'
   },
   haveMore: true,
+  currentPage: 1,
+  limit: 10,
 };
 
 export const getOffers = decorateAsyncThunk({
   key: `${OFFERS_SLICE_NAME}/getOffers`,
-  thunk: async (requestData) => {
-    console.log('requestData', requestData);
+  thunk: async ({requestData}) => {
 
     const { data } = await restController.getOffers(requestData)
 
@@ -27,35 +29,39 @@ export const getOffers = decorateAsyncThunk({
 
 export const rejectOffer = decorateAsyncThunk({
   key: `${OFFERS_SLICE_NAME}/rejectOffer`,
-  thunk: async ({ offerId, creatorId, contestId }) => {
-    await restController.rejectOffer({offerId, creatorId, contestId})
+  thunk: async ({ offerId, creatorId, contestId }, { dispatch, getState }) => {
+    await restController.rejectOffer({ offerId, creatorId, contestId });
+
+    dispatch(getOffers({ requestData: {where: { status: CONSTANTS.OFFER_STATUS_ON_MODERATION }} }));
   },
 });
 
 export const approveOffer = decorateAsyncThunk({
   key: `${OFFERS_SLICE_NAME}/approveOffer`,
-  thunk: async ({ offerId, creatorId, contestId }) => {
-    await restController.approveOffer({offerId, creatorId, contestId})
+  thunk: async ({ offerId, creatorId, contestId }, { dispatch, getState }) => {
+    await restController.approveOffer({ offerId, creatorId, contestId });
+    
+    dispatch(getOffers({ requestData: {where: { status: CONSTANTS.OFFER_STATUS_ON_MODERATION }} }));
   },
 });
 
+
 const reducers = {
-  clearOffersList: state => {
-    state.error = null;
-    state.offers = [];
-  },
   setNewModeratorFilter: (state, { payload }) => ({
     ...initialState,
     isFetching: false,
     moderatorFilter: payload,
   }),
+  setCurrentPage: (state, { payload }) => {
+    state.currentPage = payload;
+  },
 };
 
 const extraReducers = builder => {
   builder.addCase(getOffers.pending, pendingReducer);
   builder.addCase(getOffers.fulfilled, (state, { payload }) => {
     state.isFetching = false;
-    state.offers = [...state.offers, ...payload.offers];
+    state.offers = [...payload.offers];
     state.haveMore = payload.haveMore;
   });
   builder.addCase(getOffers.rejected, (state, { payload }) => {
@@ -75,8 +81,8 @@ const offersSlice = createSlice({
 const { actions, reducer } = offersSlice;
 
 export const {
-  clearOffersList,
   setNewModeratorFilter,
+  setCurrentPage,
 } = actions;
 
 export default reducer;

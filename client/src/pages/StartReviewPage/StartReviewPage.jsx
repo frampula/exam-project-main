@@ -4,6 +4,7 @@ import {
   getOffers,
   approveOffer,
   rejectOffer,
+  setCurrentPage,
 } from '../../store/slices/offersSlice';
 import CONSTANTS from '../../constants';
 import styles from './StartReviewPage.module.sass';
@@ -11,18 +12,25 @@ import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 
 const StartReviewPage = (props) => {
-  const { offers } = props.offersStore;
-
-  // console.log('offers ---> ', offers);
-
+  const { offers, currentPage, limit, haveMore } = props.offersStore;
   useEffect(() => {
+    loadOffers();
+  }, [currentPage]);
+
+  const loadOffers = () => {
+    const offset = (currentPage - 1) * limit;
     props.getOffers({
       requestData: {
-        offset: 0,
+        offset,
+        limit,
         where: { status: CONSTANTS.OFFER_STATUS_ON_MODERATION },
       },
     });
-  }, []);
+  };
+
+  const handlePageChange = (newPage) => {
+    props.setCurrentPage(newPage);
+  };
 
   const onApprove = (offer) => {
     const { contestId, id: offerId, userId } = offer;
@@ -72,6 +80,21 @@ const StartReviewPage = (props) => {
             </div>
           ))}
         </div>
+        <div className={styles.pagination}>
+          <button 
+            disabled={currentPage === 1}
+            onClick={() => handlePageChange(currentPage - 1)}
+          >
+            Previous
+          </button>
+          <span>Page {currentPage}</span>
+          <button 
+            disabled={!haveMore}
+            onClick={() => handlePageChange(currentPage + 1)}
+          >
+            Next
+          </button>
+        </div>
       </div>
       <Footer />
     </div>
@@ -88,6 +111,7 @@ const mapDispatchToProps = (dispatch) => ({
   getOffers: (bundle) => dispatch(getOffers(bundle)),
   approveOffer: (bundle) => dispatch(approveOffer(bundle)),
   rejectOffer: (bundle) => dispatch(rejectOffer(bundle)),
+  setCurrentPage: (page) => dispatch(setCurrentPage(page)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartReviewPage);

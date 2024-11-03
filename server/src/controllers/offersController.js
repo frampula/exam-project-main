@@ -143,28 +143,39 @@ module.exports.setOfferStatus = async (req, res, next) => {
   }
 };
 
-module.exports.getOffers = (req, res, next) => {
-  const { awardSort, where, limit, offset } = req.body;
+module.exports.getOffers = async (req, res, next) => {
+  const { awardSort, where, limit, offset } = req.query;
 
   const predicates = UtilFunctions.createWhereForAllOffers(awardSort, where);
-
-  db.Offers.findAll({
-    where: predicates.where,
-    order: predicates.order,
-    limit: limit || 10,
-    offset: offset ? offset : 0,
-    include: [
-      {
-        model: db.Contests,
-      },
-    ],
-  })
-    .then((data) => {
-      res.send({ offers: data });
-    })
-    .catch((err) => {
-      next(new ServerError(err));
+  
+  try {
+    const totalCount = await db.Offers.count({
+      where: predicates.where
     });
+
+    const offers = await db.Offers.findAll({
+      where: predicates.where,
+      order: predicates.order,
+      limit: parseInt(limit) || 10,
+      offset: parseInt(offset) || 0,
+      include: [
+        {
+          model: db.Contests,
+        },
+      ],
+    });
+
+    const currentOffset = parseInt(offset) || 0;
+    const currentLimit = parseInt(limit) || 10;
+    const haveMore = totalCount > (currentOffset + currentLimit);
+
+    res.send({ 
+      offers,
+      haveMore
+    });
+  } catch (err) {
+    next(new ServerError(err));
+  }
 };
 
 module.exports.rejectOfferByModerator = async (req, res, next) => {
