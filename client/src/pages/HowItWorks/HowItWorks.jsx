@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Lottie from 'lottie-react';
 import { connect } from 'react-redux';
 import styles from './HowItWorks.module.css';
