@@ -31,8 +31,9 @@ export const rejectOffer = decorateAsyncThunk({
   key: `${OFFERS_SLICE_NAME}/rejectOffer`,
   thunk: async ({ offerId, creatorId, contestId }, { dispatch, getState }) => {
     await restController.rejectOffer({ offerId, creatorId, contestId });
-
-    dispatch(getOffers({ requestData: {where: { status: CONSTANTS.OFFER_STATUS_ON_MODERATION }} }));
+    const { currentPage, limit } = getState().offersStore;
+    const offset = (currentPage - 1) * limit;
+    dispatch(getOffers({ requestData: { offset, limit, where: { status: CONSTANTS.OFFER_STATUS_ON_MODERATION }} }));
   },
 });
 
@@ -40,8 +41,9 @@ export const approveOffer = decorateAsyncThunk({
   key: `${OFFERS_SLICE_NAME}/approveOffer`,
   thunk: async ({ offerId, creatorId, contestId }, { dispatch, getState }) => {
     await restController.approveOffer({ offerId, creatorId, contestId });
-    
-    dispatch(getOffers({ requestData: {where: { status: CONSTANTS.OFFER_STATUS_ON_MODERATION }} }));
+    const { currentPage, limit } = getState().offersStore;
+    const offset = (currentPage - 1) * limit;
+    dispatch(getOffers({ requestData: {offset, limit, where: { status: CONSTANTS.OFFER_STATUS_ON_MODERATION }} }));
   },
 });
 
