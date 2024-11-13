@@ -21,3 +21,7 @@ app.use(handlerError);
 const server = http.createServer(app);
 server.listen(PORT, () =>  console.log(`Example app listening on port ${PORT}!`));
 controller.createConnection(server);
+const findTextCount = require('./utils/findTextCount')
+findTextCount('паровоз')
+  .then(count => console.log(count))
+  .catch(error => console.error(error));
