@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "postgres",
-    "password": "123123",
+    "password": "password",
     "database": "todo-dev",
-    "host": "localhost",
+    "host": "db-dev",
     "dialect": "postgres",
     "operatorsAliases": "Op",
     "seederStorage": "sequelize"
@@ -12,7 +12,7 @@
     "username": "postgres",
     "password": "admin",
     "database": "squad-help-test",
-    "host": "localhost",
+    "host": "db-dev",
     "dialect": "postgres",
     "operatorsAliases": "Op",
     "seederStorage": "sequelize"
@@ -21,7 +21,7 @@
     "username": "postgres",
     "password": "admin",
     "database": "squad-help-prod",
-    "host": "localhost",
+    "host": "db-dev",
     "dialect": "postgres",
     "operatorsAliases": "Op",
     "seederStorage": "sequelize"

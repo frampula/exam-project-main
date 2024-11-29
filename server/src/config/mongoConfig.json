@@ -6,7 +6,7 @@
   },
   "production": {
     "database": "shm-chat",
-    "host": "localhost",
+    "host": "db-dev",
     "port": 27017
   }
 }

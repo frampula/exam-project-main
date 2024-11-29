@@ -67,7 +67,6 @@ const HowItWorks = () => {
           <Lottie
             className={styles.launchAnimation}
             animationData={launchAnimation}
-            // 123123123
             loop={true}
           />
         </div>
