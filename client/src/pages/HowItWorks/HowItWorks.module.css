@@ -28,7 +28,6 @@
   flex-direction: row-reverse;
   align-items: center;
   height: 600px;
-  /* I don't want to remove the height because it spoils the appearance of the page */
   background-color: #27D2CF;
   color: rgb(248, 246, 240);
 }

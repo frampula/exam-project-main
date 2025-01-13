@@ -25,4 +25,3 @@ COPY . .
 EXPOSE 5001
 
 CMD sequelize db:migrate && sequelize db:seed:all && npm start
-# CMD npm start
