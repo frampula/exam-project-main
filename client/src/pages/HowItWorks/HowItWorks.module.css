@@ -248,9 +248,9 @@
 
 .tabs {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 30px;
-  gap: 10px;
+  gap: 25px;
 }
 
 .tab {
@@ -269,16 +269,19 @@
 }
 
 .tab.active {
-  background: #ff5a5f;
+  background: linear-gradient(45deg, #ff6955 0, #e97543 100%);
   color: white;
   transform: scale(1.1);
 }
 
 .subheading {
-  font-size: 22px;
-  color: #2d3748;
+  font-size: 1.75rem;
+  color: #377dff;
   margin-bottom: 20px;
   text-align: left;
+  font-weight: 700;
+  font-family: "Product Sans", sans-serif;
+  line-height: 1.3;
 }
 
 .questions {
@@ -287,7 +290,8 @@
 }
 
 .question {
-  border: 1px solid #ddd;
+  color: #19184a;
+  border: 1px solid #f3f5fe;
   border-radius: 10px;
   margin-bottom: 15px;
   overflow: hidden;
@@ -302,10 +306,9 @@
 .questionHeader {
   display: flex;
   justify-content: space-between;
-  padding: 15px 20px;
-  background-color: #f7f9fc;
-  font-size: 16px;
-  font-weight: 600;
+  padding: 24px 70px 24px 24px;
+  font-size: 20px;
+  font-weight: 700;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -335,4 +338,79 @@
 .answer.open {
   max-height: 200px;
   padding: 15px 20px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(248, 248, 255, 1) 100%);
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 600px;
+}
+
+.input {
+  border: none;
+  outline: 0;
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0 50px 0 48px;
+  background: #fff;
+  border-radius: 999px;
+  font-size: 24px;
+  height: 60px;
+  line-height: 60px;
+  color: #343434;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.searchButton {
+  background-color: #ff6b6b;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.searchButton:hover {
+  background-color: #e65a5a;
+}
+
+.searchIcon {
+  color: white;
+  font-size: 18px;
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tag {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background-color: #f4f4f6;
+  color: #7d7d7d;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tag:hover {
+  background-color: rgba(85, 114, 255, 0.1);
+  color: #5572ff;
 }

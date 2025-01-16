@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styles from './HowItWorks.module.css';
 import Header from '../../components/Header/Header.jsx';
 import CONSTANTS from '../../constants.js';
+import Footer from '../../components/Footer/Footer'
 
 const HowItWorks = () => {
   const [activeQuestion, setActiveQuestion] = useState(null);
@@ -11,6 +12,23 @@ const HowItWorks = () => {
   const toggleQuestion = (index) => {
     setActiveQuestion(activeQuestion === index ? null : index);
   };
+
+  const tags = [
+    'Tech',
+    'Clothing',
+    'Finance',
+    'Real Estate',
+    'Crypto',
+    'Short',
+    'One Word',
+  ];
+
+  const [search, setSearch] = useState('');
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+
   const categories = [
     {
       title: 'Launching A Contest',
@@ -284,7 +302,7 @@ const HowItWorks = () => {
                     activeQuestion === index ? styles.open : ''
                   }`}
                 >
-                  {activeQuestion === index ? '✖' : '+'}
+                  {activeQuestion === index ? '✖' : <img src='https://www.atom.com/html/html/html/static_images/icon-plus.svg' />}
                 </span>
               </div>
               <div
@@ -298,6 +316,28 @@ const HowItWorks = () => {
           ))}
         </div>
       </div>
+      <div className={styles.wrapper}>
+      <div className={styles.searchBox}>
+        <input
+          type="text"
+          placeholder="Search Over 200,000+ Premium Names"
+          value={search}
+          onChange={handleSearchChange}
+          className={styles.input}
+        />
+        <button className={styles.searchButton}>
+          <img src='https://www.atom.com/public/images/bsg/search.svg' className={styles.searchIcon}></img>
+        </button>
+      </div>
+      <div className={styles.tags}>
+        {tags.map((tag, index) => (
+          <span key={index} className={styles.tag}>
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+    <Footer />
     </>
   );
 };
