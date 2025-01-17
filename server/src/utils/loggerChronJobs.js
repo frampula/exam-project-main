@@ -26,7 +26,7 @@ function copyAndTransformLogFile() {
     }).filter(Boolean).join('\n');
     
     const newFileName = `log_${new Date().toISOString().split('T')[0]}.log`;
-    const newFilePath = path.join(__dirname, '../logs/' , newFileName);
+    const newFilePath = path.join(__dirname, '..', 'logs' , newFileName);
     
     fs.writeFile(newFilePath, transformedData, (err) => {
       if (err) {
