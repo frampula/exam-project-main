@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './MatchingUrl.css';
+import styles from './MatchingUrl.module.css';
 
 const MatchingUrlData = [
   {
@@ -17,21 +17,20 @@ const MatchingUrlData = [
 ];
 
 const MatchingUrl = () => {
-  const [selectedButton, setSelectedButton] = useState(null);
+  const [selectedButton, setSelectedButton] = useState(0);
   const handleClick = (buttonNumber) => {
     setSelectedButton(buttonNumber);
   };
 
   return (
-    <>
-      <span className="urlContainer">
-        <div className="urlText">
-          Do you want a matching domain (.com URL) with your name?
-        </div>
-      </span>
-      <div className="urlButtonsContainer">
+    <div className={styles.mainContainer}>
+      <div className={styles.urlText}>
+        Do you want a matching domain (.com URL) with your name?
+      </div>
+      <div className={styles.urlButtonsContainer}>
         {MatchingUrlData.map((item, index) => (
           <MatchingUrlItem
+            key={index}
             isSelect={selectedButton === index}
             onClick={() => handleClick(index)}
             title={item.title}
@@ -39,25 +38,26 @@ const MatchingUrl = () => {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
 const MatchingUrlItem = ({ onClick, isSelect, title, text }) => {
   return (
-    <>
-      <div
-        className={`urlButton ${isSelect ? 'selected' : ''}`}
-        onClick={() => onClick()}
-      >
-        <img
-          className={`urlImg ${isSelect ? '' : 'hidden'}`}
-          src="https://cdn-icons-png.flaticon.com/512/403/403474.png"
-        />
-        <div className={`answer ${isSelect ? 'selected' : ''}`}>{title}</div>
-        <span className="answerDescription">{text}</span>
+    <div
+      className={`${styles.urlButton} ${isSelect ? styles.selected : ''}`}
+      onClick={() => onClick()}
+    >
+      <img
+        className={`${styles.urlImg} ${isSelect ? '' : styles.hidden}`}
+        src="https://cdn-icons-png.flaticon.com/512/403/403474.png"
+        alt="url icon"
+      />
+      <div className={`${styles.answer} ${isSelect ? styles.selected : ''}`}>
+        {title}
       </div>
-    </>
+      <span className={styles.answerDescription}>{text}</span>
+    </div>
   );
 };
 

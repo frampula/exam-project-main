@@ -1,53 +1,100 @@
-.urlContainer {
+.mainContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    margin-bottom: 0;
+    margin-left: -245px;
+    width: calc(100% + 40px);
+    padding: 0 20px;
 }
 
 .urlText {
-    padding-right: 566px;
-    color: #585859;
-    font-size: 22px;
-    font-weight: 700;
+    color: #4e4d4d;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
 .urlButtonsContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    padding-top: 1.5em;
-    max-width: 950px;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 30px;
 }
 
 .urlButton {
     display: flex;
-    justify-content: center;
     flex-direction: column;
-    border: 2px solid #d0d0d0;
-    border-radius: 10px;
-    padding-left: 6px;
-    height: 100px;
-    color: #717172;
-    padding-right: 20px;
+    border: 2px solid #e7e7e7;
+    border-radius: 8px;
+    padding: 20px;
+    color: #555;
+    position: relative;
+    flex: 1;
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.2s ease;
 }
 
-.answer {
-    padding-bottom: 10px;
-    font-weight: 700;
-}
-
-.answerDescription {
-    padding-bottom: 1em;
+.urlButton:hover {
+    border-color: #d0d0d0;
 }
 
 .urlButton.selected {
-    border: 2px solid #28d2d0;
+    border: 2px solid #2B62EC;
+    background: #fff;
+}
+
+.urlButton.selected::before {
+    content: 'Recommended';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #E6EBFF;
+    color: #2B62EC;
+    padding: 2px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    display: none;
+    white-space: nowrap;
+}
+
+.urlButton:first-child.selected::before {
+    display: block;
+}
+
+.answer {
+    font-size: 18px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
 }
 
 .answer.selected {
-    color: rgb(75, 74, 74);
+    color: #333;
+}
+
+.answerDescription {
+    font-size: 15px;
+    color: #9ca8b7;
+    line-height: 1.4;
 }
 
 .urlImg {
-    max-width: 15px;
-    max-height: 15px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 16px;
+    height: 16px;
+    display: none;
+}
+
+.urlButton.selected .urlImg {
+    display: block;
+}
+
+.hidden {
+    display: none;
 }
