@@ -18,12 +18,6 @@ router.post(
 );
 
 router.post(
-  '/test',
-  checkToken.checkToken,
-  chatController.createCatalog,
-)
-
-router.post(
   '/login',
   validators.validateLogin,
   userController.login,
@@ -58,14 +52,14 @@ router.get(
   contestController.getContestById,
 );
 
-router.post(
+router.get(
   '/getAllContests',
   checkToken.checkToken,
   basicMiddlewares.onlyForCreative,
   contestController.getContests,
 );
 
-router.post(
+router.get(
   '/getUser',
   checkToken.checkAuth,
 );
@@ -76,7 +70,7 @@ router.get(
   contestController.downloadFile,
 );
 
-router.post(
+router.patch(
   '/updateContest',
   checkToken.checkToken,
   upload.updateContestFile,
@@ -146,13 +140,13 @@ router.post(
   chatController.addMessage,
 );
 
-router.post(
+router.get(
   '/getChat', 
   checkToken.checkToken,
   chatController.getChat,
 );
 
-router.post(
+router.get(
   '/getPreview', 
   checkToken.checkToken,
   chatController.getPreview,
@@ -194,13 +188,13 @@ router.post(
   chatController.removeChatFromCatalog,
 );
 
-router.post( 
+router.delete( 
   '/deleteCatalog',
   checkToken.checkToken,
   chatController.deleteCatalog,
 );
 
-router.post( 
+router.get( 
   '/getCatalogs',
   checkToken.checkToken,
   chatController.getCatalogs,

@@ -24,7 +24,7 @@ const FieldFileInput = ({ classes, ...rest }) => {
             <span id='fileNameContainer' className={fileNameClass}>
               {getFileName()}
             </span>
-            <input
+            <input 
               {...field}
               className={fileInput}
               id='fileInput'

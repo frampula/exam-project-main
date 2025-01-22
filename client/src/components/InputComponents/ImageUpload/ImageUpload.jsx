@@ -8,7 +8,6 @@ const ImageUpload = props => {
   const onChange = e => {
       const file = e.currentTarget.files[0];
       form.setFieldValue(field.name, file);
-      console.log(styles);
   };
 
   return (
