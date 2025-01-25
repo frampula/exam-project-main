@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { toast } from 'react-toastify';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeReminder } from '../../store/slices/reminderSlice';
 import * as Yup from 'yup';
 import styles from './EventCountdown.module.css';
 import Header from '../../components/Header/Header';
@@ -191,7 +193,7 @@ const EventCountdown = () => {
               <Field
                 type="number"
                 name="reminderTime"
-                placeholder="Reminder before"
+                placeholder="Reminder"
                 className={styles.formInput}
               />
               <ErrorMessage name="reminderTime" component="div" className={styles.errorMessage} />
@@ -254,4 +256,5 @@ const EventCountdown = () => {
   );
 };
 
-export default EventCountdown;
+export default EventCountdown 
+

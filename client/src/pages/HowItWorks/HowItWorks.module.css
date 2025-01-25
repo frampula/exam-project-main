@@ -54,6 +54,7 @@
 
 .atomVideo iframe {
   margin-right: 25rem;
+  margin-bottom: 18px;
   width: 500px;
   height: 280px;
   border-radius: 10px;
@@ -109,7 +110,6 @@
 }
 
 .card {
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   background: #ffffff;
@@ -118,6 +118,7 @@
   padding: 20px;
   text-align: left;
   flex: 1;
+  padding-bottom: 3rem;
 }
 
 .icon {
@@ -153,8 +154,6 @@
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-top: 30px;
-  margin-right: 12rem;
 }
 
 .cardButton:hover {
@@ -298,6 +297,10 @@
   transition: all 0.3s ease;
 }
 
+.popa {
+  color: black;
+}
+
 .question.activeQuestion {
   border-color: #377dff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -351,8 +354,11 @@
 .searchBox {
   display: flex;
   align-items: center;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(248, 248, 255, 1) 100%);
+  background: linear-gradient(45deg, rgb(142 97 255 / .5333333333) 0, #339bf7 50%, rgb(43 198 215 / .431372549) 100%);
   border-radius: 50px;
+  border-bottom-left-radius: 49px;
+  border-top-left-radius: 49px;
+  border-left: 1px solid rgb( 142, 97, 255);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   width: 100%;
@@ -374,15 +380,19 @@
   color: #343434;
   font-size: 18px;
   font-weight: 400;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .searchButton {
-  background-color: #ff6b6b;
-  color: #fff;
+  background-color: #b64141;
   border: none;
-  padding: 12px 20px;
+  padding: 20px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  background: linear-gradient(45deg, rgb(142 97 255 / .5333333333) 0, #339bf7 50%, rgb(43 198 215 / .431372549) 100%);
 }
 
 .searchButton:hover {
@@ -401,13 +411,19 @@
 }
 
 .tag {
+  display: inline-block;
+  margin: 0 12px 12px 0;
+  font-size: 14px;
+  font-weight: 400;
   padding: 6px 12px;
   border-radius: 20px;
-  background-color: #f4f4f6;
-  color: #7d7d7d;
-  font-size: 14px;
+  transition: all ease .3s;
+  color: #2b2aaa;
+  border: none;
+  background: rgb(43 42 170 / .1);
+  box-shadow: 0 1px 6px rgb(17 17 17 / .06);
+  backdrop-filter: blur(23.7219px);
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .tag:hover {

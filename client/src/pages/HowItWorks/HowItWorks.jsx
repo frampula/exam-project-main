@@ -8,10 +8,7 @@ import Footer from '../../components/Footer/Footer'
 const HowItWorks = () => {
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [activeCategory, setActiveCategory] = useState(0);
-
-  const toggleQuestion = (index) => {
-    setActiveQuestion(activeQuestion === index ? null : index);
-  };
+  const [search, setSearch] = useState('');
 
   const tags = [
     'Tech',
@@ -23,10 +20,16 @@ const HowItWorks = () => {
     'One Word',
   ];
 
-  const [search, setSearch] = useState('');
-
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
+  };
+
+  const filteredTags = tags.filter(tag =>
+    tag.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const toggleQuestion = (index) => {
+    setActiveQuestion(activeQuestion === index ? null : index);
   };
 
   const categories = [
@@ -77,7 +80,7 @@ const HowItWorks = () => {
         {
           question: "What's included with a Domain Purchase?",
           answer:
-            'When you purchase a domain from our premium domain marketplace, you will receive the exact match .com URL, a complimentary logo design (along with all source files), as well as a complimentary Trademark report and Audience Testing if you’re interested in validating your name.',
+            'When you purchase a domain from our premium domain marketplace, you will receive the exact match .com URL, a complimentary logo design (along with all source files), as well as a complimentary Trademark report and Audience Testing if you are interested in validating your name.',
         },
         {
           question: 'How does the Domain transfer process work?',
@@ -317,27 +320,31 @@ const HowItWorks = () => {
         </div>
       </div>
       <div className={styles.wrapper}>
-      <div className={styles.searchBox}>
-        <input
-          type="text"
-          placeholder="Search Over 200,000+ Premium Names"
-          value={search}
-          onChange={handleSearchChange}
-          className={styles.input}
-        />
-        <button className={styles.searchButton}>
-          <img src='https://www.atom.com/public/images/bsg/search.svg' className={styles.searchIcon}></img>
-        </button>
+        <div className={styles.searchBox}>
+          <input
+            type="text"
+            placeholder="Search Over 200,000+ Premium Names"
+            value={search}
+            onChange={handleSearchChange}
+            className={styles.input}
+          />
+          <button className={styles.searchButton}>
+            <img src='https://www.atom.com/public/images/bsg/search.svg' className={styles.searchIcon}></img>
+          </button>
+        </div>
+        <div className={styles.tags}>
+          {filteredTags.length > 0 ? (
+            filteredTags.map((tag, index) => (
+              <span key={index} className={styles.tag}>
+                {tag}
+              </span>
+            ))
+          ) : (
+            <span className={styles.tag}>No tags found</span>
+          )}
+        </div>
       </div>
-      <div className={styles.tags}>
-        {tags.map((tag, index) => (
-          <span key={index} className={styles.tag}>
-            {tag}
-          </span>
-        ))}
-      </div>
-    </div>
-    <Footer />
+      <Footer />
     </>
   );
 };
