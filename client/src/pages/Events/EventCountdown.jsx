@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { toast } from 'react-toastify';
-import { useSelector, useDispatch } from 'react-redux';
-import { removeReminder } from '../../store/slices/reminderSlice';
 import * as Yup from 'yup';
 import styles from './EventCountdown.module.css';
 import Header from '../../components/Header/Header';
@@ -32,7 +30,6 @@ const EventCountdown = () => {
           const now = Date.now();
           const timeLeft = Math.max(0, check.endTime - now);
           
-          // Проверяем время для напоминания
           if (check.reminderTime && now >= check.reminderTime && !check.reminderShown) {
             toast.info(`Reminder: ${check.name} will end in ${formatTime(timeLeft)}!`, {
               position: "top-right",

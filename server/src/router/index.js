@@ -140,7 +140,7 @@ router.post(
   chatController.addMessage,
 );
 
-router.get(
+router.post(
   '/getChat', 
   checkToken.checkToken,
   chatController.getChat,

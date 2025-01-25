@@ -30,8 +30,7 @@ const ChatHeader = (props) => {
     return blackList[participants.indexOf(userId)];
   };
 
-  const { avatar, firstName } = props.interlocutor;
-  const { backToDialogList, chatData, userId } = props;
+  const {interlocutor: {avatar, firstName}, backToDialogList, chatData, userId } = props;
   return (
     <div className={styles.chatHeader}>
       <div
