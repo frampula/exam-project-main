@@ -5,104 +5,12 @@ import * as Yup from 'yup';
 import styles from './EventCountdown.module.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import {EventCountdownContext} from "../../components/EventCountdownHoc/EventCountdownHoc"
+import Schems from '../../utils/validators/validationSchems';
+import { formatTime, convertToMilliseconds } from '../../utils/time';
 
 const EventCountdown = () => {
-  const [checks, setChecks] = useState(() => {
-    const savedChecks = localStorage.getItem('eventChecks');
-    if (savedChecks) {
-      const parsedChecks = JSON.parse(savedChecks);
-      return parsedChecks.map(check => ({
-        ...check,
-        timeLeft: Math.max(0, check.endTime - Date.now())
-      }));
-    }
-    return [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem('eventChecks', JSON.stringify(checks));
-  }, [checks]);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setChecks(prevChecks => 
-        prevChecks.map(check => {
-          const now = Date.now();
-          const timeLeft = Math.max(0, check.endTime - now);
-          
-          if (check.reminderTime && now >= check.reminderTime && !check.reminderShown) {
-            toast.info(`Reminder: ${check.name} will end in ${formatTime(timeLeft)}!`, {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-            });
-            return { ...check, reminderShown: true, timeLeft };
-          }
-
-          if (timeLeft === 0 && check.status !== 'completed') {
-            toast.success(`Event completed: ${check.name}`, {
-              position: "top-right",
-              autoClose: 5000,
-            });
-            return { ...check, status: 'completed', backgroundColor: '#f5f5f5', timeLeft };
-          }
-          return { ...check, timeLeft };
-        })
-      );
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const CheckSchema = Yup.object().shape({
-    name: Yup.string()
-      .required('Check name is required')
-      .min(3, 'Too Short!')
-      .max(50, 'Too Long!'),
-    duration: Yup.number()
-      .required('Duration is required')
-      .positive('Must be positive')
-      .max(999, 'Value is too large'),
-    timeUnit: Yup.string()
-      .required('Time unit is required')
-      .oneOf(['minutes', 'hours', 'days'], 'Invalid time unit'),
-    reminderTime: Yup.number()
-      .min(0, 'Must be positive')
-      .max(100, 'Value is too large')
-      .required('Reminder time is required'),
-    reminderUnit: Yup.string()
-      .required('Reminder unit is required')
-      .oneOf(['minutes', 'hours', 'days'], 'Invalid time unit')
-  });
-
-  const convertToMilliseconds = (value, unit) => {
-    const conversions = {
-      minutes: value * 60 * 1000,
-      hours: value * 60 * 60 * 1000,
-      days: value * 24 * 60 * 60 * 1000
-    };
-    return conversions[unit];
-  };
-
-  const formatTime = (ms) => {
-    if (ms <= 0) return 'Completed';
-    
-    const days = Math.floor(ms / (24 * 60 * 60 * 1000));
-    const hours = Math.floor((ms % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-    const minutes = Math.floor((ms % (60 * 60 * 1000)) / (60 * 1000));
-    const seconds = Math.floor((ms % (60 * 1000)) / 1000);
-
-    const parts = [];
-    if (days > 0) parts.push(`${days}d`);
-    if (hours > 0) parts.push(`${hours}h`);
-    if (minutes > 0) parts.push(`${minutes}m`);
-    if (seconds > 0) parts.push(`${seconds}s`);
-
-    return parts.join(' ');
-  };
+  const {addCheck, delCheck, checks} = useContext(EventCountdownContext)
 
   const handleSubmit = (values, { resetForm }) => {
     const durationMs = convertToMilliseconds(values.duration, values.timeUnit);
@@ -119,12 +27,9 @@ const EventCountdown = () => {
       status: 'active',
       backgroundColor: '#e8f5e9'
     };
-    setChecks(prev => [...prev, newCheck]);
-    resetForm();
-  };
 
-  const handleDelete = (index) => {
-    setChecks(prev => prev.filter((_, i) => i !== index));
+    addCheck(newCheck)
+    resetForm();
   };
 
   const calculateProgress = (check) => {
@@ -152,7 +57,7 @@ const EventCountdown = () => {
             reminderTime: '',
             reminderUnit: 'minutes'
           }}
-          validationSchema={CheckSchema}
+          validationSchema={Schems.CheckSchema}
           onSubmit={handleSubmit}
         >
           <Form className={styles.checkForm}>
@@ -224,10 +129,10 @@ const EventCountdown = () => {
                 <div className={styles.checkName}>{check.name}</div>
                 <div className={styles.checkActions}>
                   <div className={styles.checkDuration}>
-                    {formatTime(check.timeLeft)}
+                  {(check.timeLeft ? formatTime(check.timeLeft) : 'Completed')}
                   </div>
                   <button
-                    onClick={() => handleDelete(index)}
+                    onClick={() => delCheck(index)}
                     className={styles.deleteButton}
                     aria-label="Delete check"
                   >

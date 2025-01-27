@@ -225,4 +225,24 @@ export default {
       )
       .required('required'),
   }),
+  CheckSchema: yup.object().shape({
+    name: yup.string()
+      .required('Check name is required')
+      .min(3, 'Too Short!')
+      .max(50, 'Too Long!'),
+    duration: yup.number()
+      .required('Duration is required')
+      .positive('Must be positive')
+      .max(999, 'Value is too large'),
+    timeUnit: yup.string()
+      .required('Time unit is required')
+      .oneOf(['minutes', 'hours', 'days'], 'Invalid time unit'),
+    reminderTime: yup.number()
+      .min(0, 'Must be positive')
+      .max(100, 'Value is too large')
+      .required('Reminder time is required'),
+    reminderUnit: yup.string()
+      .required('Reminder unit is required')
+      .oneOf(['minutes', 'hours', 'days'], 'Invalid time unit')
+  })  
 };

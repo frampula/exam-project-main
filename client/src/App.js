@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { ToastContainer } from 'react-toastify';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
 import Payment from './pages/Payment/Payment';
@@ -10,12 +9,12 @@ import StartReviewPage from './pages/StartReviewPage/StartReviewPage';
 import Dashboard from './pages/Dashboard/Dashboard';
 import PrivateHoc from './components/PrivateHoc/PrivateHoc';
 import RoleHoc from './components/RoleHoc/RoleHoc';
+import EventCountdownHoc from './components/EventCountdownHoc/EventCountdownHoc';
 import NotFound from './components/NotFound/NotFound';
 import Home from './pages/Home/Home';
 import OnlyNotAuthorizedUserHoc from './components/OnlyNotAuthorizedUserHoc/OnlyNotAuthorizedUserHoc';
 import ContestPage from './pages/ContestPage/ContestPage';
 import UserProfile from './pages/UserProfile/UserProfile';
-import 'react-toastify/dist/ReactToastify.css';
 import ContestCreationPage from './pages/ContestCreation/ContestCreationPage';
 import CONSTANTS from './constants';
 import browserHistory from './browserHistory';
@@ -27,19 +26,8 @@ class App extends Component {
   render() {
     return (
       <Router history={browserHistory}>
-        <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnVisibilityChange
-          draggable
-          pauseOnHover
-        />
         <Switch>
-          <Route exact path="/" component={PrivateHoc(Home)} />
+          <Route exact path="/" component={PrivateHoc(EventCountdownHoc((Home)))} />
           <Route
             exact
             path="/login"
@@ -50,21 +38,21 @@ class App extends Component {
             path="/registration"
             component={OnlyNotAuthorizedUserHoc(RegistrationPage)}
           />
-          <Route exact path="/payment" component={PrivateHoc(Payment)} />
+          <Route exact path="/payment" component={PrivateHoc(EventCountdownHoc((Payment)))} />
           <Route
             exact
             path="/startContest"
-            component={PrivateHoc(StartContestPage)}
+            component={PrivateHoc(EventCountdownHoc((StartContestPage)))}
           />
           <Route
             exact
             path='/startReview'
-            component={PrivateHoc(RoleHoc(StartReviewPage, CONSTANTS.MODERATOR))}
+            component={PrivateHoc(RoleHoc(EventCountdownHoc((StartReviewPage, CONSTANTS.MODERATOR))))}
           />
           <Route
             exact
             path='/startContest/nameContest'
-            component={PrivateHoc(ContestCreationPage, {
+            component={PrivateHoc(EventCountdownHoc(ContestCreationPage), {
               contestType: CONSTANTS.NAME_CONTEST,
               title: 'Company Name',
             })}
@@ -72,27 +60,17 @@ class App extends Component {
           <Route
             exact
             path="/startContest/taglineContest"
-            component={PrivateHoc(ContestCreationPage, {
+            component={PrivateHoc(EventCountdownHoc((ContestCreationPage)), {
               contestType: CONSTANTS.TAGLINE_CONTEST,
               title: 'TAGLINE',
             })}
-          />
-          <Route
-          exact
-          path = "/how-it-works"
-          component={PrivateHoc(HowItWorks)} 
-          />
-          <Route
-          exact
-          path = "/events"
-          component={PrivateHoc(Events)} 
           />
           <Route
             exact
             path="/how-it-works"
             component={PrivateHoc(HowItWorks)}
           />
-          <Route exact path="/events" component={PrivateHoc(Events)} />
+          <Route exact path="/events" component={PrivateHoc(EventCountdownHoc(Events))} />
           <Route
             exact
             path="/startContest/logoContest"
@@ -101,13 +79,13 @@ class App extends Component {
               title: 'LOGO',
             })}
           />
-          <Route exact path="/dashboard" component={PrivateHoc(Dashboard)} />
+          <Route exact path="/dashboard" component={PrivateHoc(EventCountdownHoc(Dashboard))} />
           <Route
             exact
             path="/contest/:id"
             component={PrivateHoc(ContestPage)}
           />
-          <Route exact path="/account" component={PrivateHoc(UserProfile)} />
+          <Route exact path="/account" component={PrivateHoc(EventCountdownHoc((UserProfile)))} />
           <Route component={NotFound} />
         </Switch>
         <ChatContainer />
