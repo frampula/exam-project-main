@@ -27,7 +27,7 @@ class App extends Component {
     return (
       <Router history={browserHistory}>
         <Switch>
-          <Route exact path="/" component={PrivateHoc(EventCountdownHoc((Home)))} />
+          <Route exact path="/" component={PrivateHoc(Home)} />
           <Route
             exact
             path="/login"
@@ -41,13 +41,13 @@ class App extends Component {
           <Route exact path="/payment" component={PrivateHoc(EventCountdownHoc((Payment)))} />
           <Route
             exact
-            path="/startContest"
-            component={PrivateHoc(EventCountdownHoc((StartContestPage)))}
+            path='/startReview'
+            component={PrivateHoc(EventCountdownHoc(RoleHoc(StartReviewPage, [CONSTANTS.MODERATOR])))}
           />
           <Route
             exact
-            path='/startReview'
-            component={PrivateHoc(RoleHoc(EventCountdownHoc((StartReviewPage, CONSTANTS.MODERATOR))))}
+            path="/startContest"
+            component={PrivateHoc(EventCountdownHoc(RoleHoc(StartContestPage, [CONSTANTS.CUSTOMER])))}
           />
           <Route
             exact
@@ -60,32 +60,32 @@ class App extends Component {
           <Route
             exact
             path="/startContest/taglineContest"
-            component={PrivateHoc(EventCountdownHoc((ContestCreationPage)), {
+            component={PrivateHoc(EventCountdownHoc(ContestCreationPage), {
               contestType: CONSTANTS.TAGLINE_CONTEST,
               title: 'TAGLINE',
             })}
           />
           <Route
             exact
-            path="/how-it-works"
-            component={PrivateHoc(HowItWorks)}
-          />
-          <Route exact path="/events" component={PrivateHoc(EventCountdownHoc(Events))} />
-          <Route
-            exact
             path="/startContest/logoContest"
-            component={PrivateHoc(ContestCreationPage, {
+            component={PrivateHoc(EventCountdownHoc(ContestCreationPage), {
               contestType: CONSTANTS.LOGO_CONTEST,
               title: 'LOGO',
             })}
           />
-          <Route exact path="/dashboard" component={PrivateHoc(EventCountdownHoc(Dashboard))} />
+          <Route
+            exact
+            path="/how-it-works"
+            component={PrivateHoc(EventCountdownHoc(HowItWorks))}
+          />
+          <Route exact path="/events" component={PrivateHoc(EventCountdownHoc(RoleHoc(Events, [CONSTANTS.CUSTOMER])))} />
+          <Route exact path="/dashboard" component={PrivateHoc(EventCountdownHoc(RoleHoc(Dashboard, [CONSTANTS.CUSTOMER, CONSTANTS.CREATOR])))} />
           <Route
             exact
             path="/contest/:id"
             component={PrivateHoc(ContestPage)}
           />
-          <Route exact path="/account" component={PrivateHoc(EventCountdownHoc((UserProfile)))} />
+          <Route exact path="/account" component={PrivateHoc(EventCountdownHoc(UserProfile, [CONSTANTS.CUSTOMER, CONSTANTS.CREATOR]))} />
           <Route component={NotFound} />
         </Switch>
         <ChatContainer />

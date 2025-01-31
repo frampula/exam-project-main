@@ -5,7 +5,7 @@ import Spinner from '../Spinner/Spinner';
 const RoleHoc = (Component, role) => {
   class Hoc extends React.Component {
     componentDidMount() {
-      if (!this.props.data?.role || this.props.data?.role !== role) {
+      if (!this.props.data?.role || !role.includes(this.props.data?.role)) {
         this.props.history.replace('/');
       }
     }

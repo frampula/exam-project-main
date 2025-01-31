@@ -10,7 +10,7 @@ import HowItWorksStyle from '../../pages/HowItWorks/HowItWorks.module.css';
 const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const userData = useSelector(state => state.userStore.data);
+  const userData = useSelector((state) => state.userStore.data);
 
   const data = userData;
 
@@ -26,28 +26,6 @@ const Header = () => {
 
   const startReview = () => {
     history.push('/startReview');
-  };
-
-  const handleUpcomingEventsClick = (e) => {
-    e.preventDefault();
-    if (!data) {
-      history.push('/login');
-      return;
-    }
-    
-    if (data.role !== CONSTANTS.CUSTOMER) {
-      toast.error('Only customers can access the events page!', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-      return;
-    }
-    
-    history.push('/events');
   };
 
   const renderLoginButtons = () => {
@@ -139,7 +117,7 @@ const Header = () => {
         </div>
       </div>
       <div className={styles.navContainer}>
-        <a href='/'>
+        <a href="/">
           <img
             src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`}
             className={styles.logo}
@@ -189,16 +167,14 @@ const Header = () => {
                   alt="menu"
                 />
                 <ul>
-                  <Link to="/how-it-works" style={{ HowItWorksStyle }}>
-                    <li>
-                      <a href=''>HOW IT WORKS</a>
-                    </li>
-                  </Link>
+                  <li>
+                    <Link to="/how-it-works">HOW IT WORKS</Link>
+                  </li>
                   <li>
                     <a href="http://www.google.com">PRICING</a>
                   </li>
                   <li>
-                    <a href="" onClick={handleUpcomingEventsClick}>UPCOMING EVENTS</a>
+                    <Link to="/events">UPCOMING EVENTS</Link>
                   </li>
                   <li>
                     <a href="http://www.google.com">ACTIVE CONTESTS</a>
@@ -288,18 +264,12 @@ const Header = () => {
             </ul>
           </div>
           {userData && userData.role === CONSTANTS.CUSTOMER && (
-            <div
-              className={styles.startContestBtn}
-              onClick={startContests}
-            >
+            <div className={styles.startContestBtn} onClick={startContests}>
               START CONTEST
             </div>
           )}
           {userData && userData.role === CONSTANTS.MODERATOR && (
-            <div
-              className={styles.startContestBtn}
-              onClick={startReview}
-            >
+            <div className={styles.startContestBtn} onClick={startReview}>
               START REVIEW
             </div>
           )}
