@@ -19,8 +19,8 @@ const CatalogListContainer = () => {
   }, [dispatch]);
 
   const handleRemoveChatFromCatalog = (event, chatId) => {
-    const { _id } = currentCatalog;
-    dispatch(removeChatFromCatalog({ chatId, catalogId: _id }));
+    const { id } = currentCatalog;
+    dispatch(removeChatFromCatalog({ chatId, catalogId: id }));
     event.stopPropagation();
   };
 

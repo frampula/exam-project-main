@@ -23,10 +23,11 @@ const initialState = {
 export const getContests = decorateAsyncThunk({
   key: `${CONTESTS_SLICE_NAME}/getContests`,
   thunk: async ({ requestData, role }) => {
+    const updateRequestData = {...requestData, entriesType: requestData.ownEntries ? 'own' : 'all'}
     const { data } =
       role === CONSTANTS.CUSTOMER
-        ? await restController.getCustomersContests(requestData)
-        : await restController.getActiveContests(requestData);
+        ? await restController.getCustomersContests(updateRequestData)
+        : await restController.getActiveContests(updateRequestData);
     return data;
   },
 });

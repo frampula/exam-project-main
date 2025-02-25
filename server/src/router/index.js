@@ -7,7 +7,7 @@ const offersController = require('../controllers/offersController');
 const checkToken = require('../middlewares/checkToken');
 const validators = require('../middlewares/validators');
 const chatController = require('../controllers/chatController');
-const upload = require('../utils/fileUpload');
+const upload = require('../middlewares/fileUpload');
 const router = express.Router();
 
 router.post(
@@ -120,7 +120,7 @@ router.post(
   userController.changeMark,
 );
 
-router.post(
+router.patch(
   '/updateUser',
   checkToken.checkToken,
   upload.uploadAvatar,
@@ -140,7 +140,7 @@ router.post(
   chatController.addMessage,
 );
 
-router.post(
+router.get(
   '/getChat', 
   checkToken.checkToken,
   chatController.getChat,
@@ -170,7 +170,7 @@ router.post(
   chatController.createCatalog,
 );
 
-router.post( 
+router.patch(
   '/updateNameCatalog',
   checkToken.checkToken,
   chatController.updateNameCatalog,

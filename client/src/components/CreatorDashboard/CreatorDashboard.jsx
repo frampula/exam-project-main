@@ -59,7 +59,7 @@ class CreatorDashboard extends React.Component {
   renderIndustryType = () => {
     const array = [];
     const { creatorFilter } = this.props;
-    const  { industry } = this.props.dataForContest.data;
+    const { industry } = this.props.dataForContest.data;
     array.push(
       <option key={0} value={null}>
         Choose industry
@@ -205,18 +205,21 @@ class CreatorDashboard extends React.Component {
         <div className={styles.filterContainer}>
           <span className={styles.headerFilter}>Filter Results</span>
           <div className={styles.inputsContainer}>
-            <div
-              onClick={() =>
-                this.changePredicate({
-                  name: 'ownEntries',
-                  value: !creatorFilter.ownEntries,
-                })
-              }
-              className={classNames(styles.myEntries, {
-                [styles.activeMyEntries]: creatorFilter.ownEntries,
-              })}
-            >
-              My Entries
+            <div className={styles.inputOwnEntries}>
+              <span>My Entries</span>
+              <input
+                onChange={() =>
+                  this.changePredicate({
+                    name: 'ownEntries',
+                    value: !creatorFilter.ownEntries,
+                  })
+                }
+                checked={creatorFilter.ownEntries}
+                type="checkbox"
+                className={classNames(styles.myEntries, {
+                  [styles.activeMyEntries]: creatorFilter.ownEntries,
+                })}
+              />
             </div>
             <div className={styles.inputContainer}>
               <span>By contest type</span>

@@ -31,6 +31,7 @@ const ChatHeader = (props) => {
   };
 
   const {interlocutor: {avatar, firstName}, backToDialogList, chatData, userId } = props;
+
   return (
     <div className={styles.chatHeader}>
       <div

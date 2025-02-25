@@ -5,6 +5,7 @@ const userQueries = require('./queries/userQueries');
 const controller = require('../socketInit');
 const UtilFunctions = require('../utils/functions');
 const CONSTANTS = require('../constants');
+const { string } = require('yup');
 
 module.exports.dataForContest = async (req, res, next) => {
   const response = {};
@@ -30,7 +31,6 @@ module.exports.dataForContest = async (req, res, next) => {
     });
     res.send(response);
   } catch (err) {
-    console.log(err);
     next(new ServerError('cannot get contest preferences'));
   }
 };
@@ -241,18 +241,23 @@ module.exports.getCustomersContests = (req, res, next) => {
 };
 
 module.exports.getContests = (req, res, next) => {
-  const predicates = UtilFunctions.createWhereForAllContests(req.body.typeIndex,
-    req.body.contestId, req.body.industry, req.body.awardSort);
+  const predicates = UtilFunctions.createWhereForAllContests(
+    req.query.typeIndex,
+    req.query.contestId, 
+    req.query.industry, 
+    req.query.awardSort
+  );
+
   db.Contests.findAll({
     where: predicates.where,
     order: predicates.order,
-    limit: req.body.limit,
-    offset: req.body.offset ? req.body.offset : 0,
+    limit: req.query.limit,
+    offset: req.query.offset ? req.query.offset : 0,
     include: [
       {
         model: db.Offers,
-        required: req.body.ownEntries,
-        where: req.body.ownEntries ? { userId: req.tokenData.userId } : {},
+        required: req.query.entriesType === "own",
+        where: req.query.entriesType === "own" ? { userId: req.tokenData.userId } : {},
         attributes: ['id'],
       },
     ],
@@ -270,4 +275,3 @@ module.exports.getContests = (req, res, next) => {
       next(new ServerError());
     });
 };
-

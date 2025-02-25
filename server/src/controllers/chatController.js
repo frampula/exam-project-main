@@ -16,7 +16,6 @@ module.exports.addMessage = async (req, res, next) => {
       where: { participants },
       defaults: { blackList: [false, false], favoriteList: [false, false] },
     });
-
     const message = await Messages.create({
       sender: req.tokenData.userId,
       body: req.body.messageBody,
@@ -26,6 +25,7 @@ module.exports.addMessage = async (req, res, next) => {
     const interlocutorId = participants.filter(
       (participant) => participant !== req.tokenData.userId
     )[0];
+
     const preview = {
       _id: newConversation.id,
       sender: req.tokenData.userId,
@@ -58,20 +58,20 @@ module.exports.addMessage = async (req, res, next) => {
 };
 
 module.exports.getChat = async (req, res, next) => {
-  const participants = [req.tokenData.userId, req.body.interlocutorId];
+  const participants = [req.tokenData.userId, req.query.interlocutorId];
   participants.sort(
     (participant1, participant2) => participant1 - participant2
   );
 
   try {
     const messages = await Messages.findAll({
-      where: { conversationId: req.body.conversationId },
+      where: { conversationId: req.query.conversationId },
       include: [{ model: Conversations, where: { participants } }],
       order: [['createdAt', 'ASC']],
     });
 
     const interlocutor = await userQueries.findUser({
-      id: req.body.interlocutorId,
+      id: req.query.interlocutorId,
     });
     res.send({
       messages,
@@ -161,24 +161,32 @@ module.exports.getPreview = async (req, res, next) => {
 
 module.exports.blackList = async (req, res, next) => {
   const participantIndex = req.body.participants.indexOf(req.tokenData.userId);
-  const predicate = `blackList[${participantIndex}]`;
-
+  
   try {
     const chat = await Conversations.findOne({
       where: { participants: req.body.participants },
     });
 
     if (chat) {
-      chat.blackList[participantIndex] = req.body.blackListFlag;
-      await chat.save();
-      res.send(chat);
+      const newBlackList = [...chat.blackList];
+      newBlackList[participantIndex] = req.body.blackListFlag;
+      
+      await chat.update({
+        blackList: newBlackList
+      });
+
+      const updatedChat = await chat.reload();
+      res.send(updatedChat);
 
       const interlocutorId = req.body.participants.filter(
         (participant) => participant !== req.tokenData.userId
       )[0];
+      
       controller
         .getChatController()
-        .emitChangeBlockStatus(interlocutorId, chat);
+        .emitChangeBlockStatus(interlocutorId, updatedChat);
+    } else {
+      res.status(404).send({ message: 'Chat not found' });
     }
   } catch (err) {
     next(err);
@@ -187,17 +195,24 @@ module.exports.blackList = async (req, res, next) => {
 
 module.exports.favoriteChat = async (req, res, next) => {
   const participantIndex = req.body.participants.indexOf(req.tokenData.userId);
-  const predicate = `favoriteList[${participantIndex}]`;
-
+  
   try {
     const chat = await Conversations.findOne({
       where: { participants: req.body.participants },
     });
 
     if (chat) {
-      chat.favoriteList[participantIndex] = req.body.favoriteFlag;
-      await chat.save();
-      res.send(chat);
+      const newFavoriteList = [...chat.favoriteList];
+      newFavoriteList[participantIndex] = req.body.favoriteFlag;
+
+      await chat.update({
+        favoriteList: newFavoriteList
+      });
+      
+      const updatedChat = await chat.reload();
+      res.send(updatedChat);
+    } else {
+      res.status(404).send({ message: 'Chat not found' });
     }
   } catch (err) {
     next(err);
@@ -205,7 +220,6 @@ module.exports.favoriteChat = async (req, res, next) => {
 };
 
 module.exports.createCatalog = async (req, res, next) => {
-  console.log(req.body, req.tokenData);
   const catalog = await Catalogs.create({
     userId: req.tokenData.userId,
     catalogName: req.body.catalogName,
@@ -278,7 +292,7 @@ module.exports.removeChatFromCatalog = async (req, res, next) => {
 module.exports.deleteCatalog = async (req, res, next) => {
   try {
     const result = await Catalogs.destroy({
-      where: { id: req.body.catalogId, userId: req.tokenData.userId },
+      where: { id: req.query.catalogId, userId: req.tokenData.userId },
     });
 
     if (result) {

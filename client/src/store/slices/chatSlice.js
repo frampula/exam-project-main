@@ -312,7 +312,6 @@ const reducers = {
     const { message, preview } = payload;
     const { messagesPreview } = state;
     let isNew = true;
-    console.log(messagesPreview);
     messagesPreview.forEach(preview => {
       if (isEqual(preview.participants, message.participants)) {
         preview.text = message.body;

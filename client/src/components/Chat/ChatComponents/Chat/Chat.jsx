@@ -96,7 +96,7 @@ const Chat = () => {
       {chatMode === CATALOG_PREVIEW_CHAT_MODE ? (
         <CatalogListContainer />
       ) : (
-        <DialogListContainer userId={id} />
+        <DialogListContainer />
       )}
     </div>
   );

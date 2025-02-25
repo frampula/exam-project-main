@@ -10,7 +10,7 @@ const initialState = {
   error: null,
   offers: [],
   moderatorFilter: {
-    awardSort: 'asc'
+    awardSort: 'asc',
   },
   haveMore: true,
   currentPage: 1,
@@ -19,9 +19,8 @@ const initialState = {
 
 export const getOffers = decorateAsyncThunk({
   key: `${OFFERS_SLICE_NAME}/getOffers`,
-  thunk: async ({requestData}) => {
-
-    const { data } = await restController.getOffers(requestData)
+  thunk: async ({ requestData }) => {
+    const { data } = await restController.getOffers(requestData);
 
     return data;
   },
@@ -33,7 +32,15 @@ export const rejectOffer = decorateAsyncThunk({
     await restController.rejectOffer({ offerId, creatorId, contestId });
     const { currentPage, limit } = getState().offersStore;
     const offset = (currentPage - 1) * limit;
-    dispatch(getOffers({ requestData: { offset, limit, where: { status: CONSTANTS.OFFER_STATUS_ON_MODERATION }} }));
+    dispatch(
+      getOffers({
+        requestData: {
+          offset,
+          limit,
+          where: { status: CONSTANTS.OFFER_STATUS_ON_MODERATION },
+        },
+      })
+    );
   },
 });
 
@@ -43,10 +50,17 @@ export const approveOffer = decorateAsyncThunk({
     await restController.approveOffer({ offerId, creatorId, contestId });
     const { currentPage, limit } = getState().offersStore;
     const offset = (currentPage - 1) * limit;
-    dispatch(getOffers({ requestData: {offset, limit, where: { status: CONSTANTS.OFFER_STATUS_ON_MODERATION }} }));
+    dispatch(
+      getOffers({
+        requestData: {
+          offset,
+          limit,
+          where: { status: CONSTANTS.OFFER_STATUS_ON_MODERATION },
+        },
+      })
+    );
   },
 });
-
 
 const reducers = {
   setNewModeratorFilter: (state, { payload }) => ({
@@ -59,7 +73,7 @@ const reducers = {
   },
 };
 
-const extraReducers = builder => {
+const extraReducers = (builder) => {
   builder.addCase(getOffers.pending, pendingReducer);
   builder.addCase(getOffers.fulfilled, (state, { payload }) => {
     state.isFetching = false;
@@ -82,9 +96,6 @@ const offersSlice = createSlice({
 
 const { actions, reducer } = offersSlice;
 
-export const {
-  setNewModeratorFilter,
-  setCurrentPage,
-} = actions;
+export const { setNewModeratorFilter, setCurrentPage } = actions;
 
 export default reducer;

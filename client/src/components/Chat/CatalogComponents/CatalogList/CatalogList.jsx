@@ -5,6 +5,7 @@ import styles from '../CatalogListContainer/CatalogListContainer.module.sass';
 import {
   changeShowModeCatalog,
   deleteCatalog,
+  getCatalogList,
 } from '../../../../store/slices/chatSlice';
 
 const CatalogList = (props) => {
@@ -13,9 +14,9 @@ const CatalogList = (props) => {
     event.stopPropagation();
   };
 
-  const deleteCatalog = (event, catalogId) => {
-    props.deleteCatalog({ catalogId });
-    event.stopPropagation();
+  const deleteCatalog = async (event, catalogId) => {
+    await props.deleteCatalog({ catalogId });
+    props.getCatalogList()
   };
 
   const getListCatalog = () => {
@@ -25,7 +26,7 @@ const CatalogList = (props) => {
       elementList.push(
         <Catalog
           catalog={catalog}
-          key={catalog._id}
+          key={catalog.id}
           deleteCatalog={deleteCatalog}
           goToCatalog={goToCatalog}
         />
@@ -42,6 +43,7 @@ const CatalogList = (props) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  getCatalogList: (data) => dispatch(getCatalogList()),
   changeShowModeCatalog: (data) => dispatch(changeShowModeCatalog(data)),
   deleteCatalog: (data) => dispatch(deleteCatalog(data)),
 });

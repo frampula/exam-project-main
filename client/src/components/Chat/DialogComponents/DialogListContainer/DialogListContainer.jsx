@@ -5,13 +5,20 @@ import DialogList from '../DialogList/DialogList';
 
 const DialogListContainer = () => {
   const dispatch = useDispatch();
-  const { messagesPreview, userId } = useSelector((state) => state.chatStore);
+
+  const { chatStore, userStore } = useSelector(state => ({
+    chatStore: state.chatStore,
+    userStore: state.userStore
+  }));
+
+  const { messagesPreview } = chatStore;
+  const { id } = userStore.data;
 
   useEffect(() => {
     dispatch(getPreviewChat());
   }, [dispatch]);
 
-  return <DialogList preview={messagesPreview} userId={userId} />;
+  return <DialogList preview={messagesPreview} userId={id} />;
 };
 
 export default DialogListContainer;
