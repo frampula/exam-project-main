@@ -2,28 +2,28 @@
 SELECT
     COUNT(id) AS "count",
     role
-FROM "users"
+FROM "Users"
 GROUP BY role;
 
 --task 10
-UPDATE "users"
+UPDATE "Users"
 SET balance = balance + sm
 FROM 
     (SELECT SUM(prize) * 0.1 AS sm,
-            "userid"
-     FROM "contests"
+            "userId"
+     FROM "Contests"
      WHERE status = 'finished' 
-       AND "createdat"::date BETWEEN '2024-08-25' AND '2024-08-26'
-     GROUP BY "userid") cs
-WHERE "users".id = cs."userid";
+       AND "createdAt"::date BETWEEN '2024-12-25' AND '2025-01-14'
+     GROUP BY "userId") cs
+WHERE "Users".id = cs."userId";
 
 --task 11
-UPDATE "users"
+UPDATE "Users"
 SET balance = balance + 10
 FROM 
     (SELECT id
-     FROM "users"
+     FROM "Users"
      WHERE role = 'creator'
      ORDER BY rating DESC
      LIMIT 3) t
-WHERE "users".id = t.id;
+WHERE "Users".id = t.id;
