@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef } from 'react';
 import { connect } from 'react-redux';
 import { Formik, Form } from 'formik';
 import CONTANTS from '../../constants';
@@ -13,11 +13,15 @@ import Schems from '../../utils/validators/validationSchems';
 import Error from '../Error/Error';
 
 const OfferForm = props => {
+  const formikRef = useRef();
+
   const renderOfferInput = () => {
     if (props.contestType === CONTANTS.LOGO_CONTEST) {
       return (
         <ImageUpload
+          formRef={formikRef}
           name='offerData'
+          label="Choose file"
           classes={{
             uploadContainer: styles.imageUploadContainer,
             inputContainer: styles.uploadInputContainer,
@@ -42,6 +46,8 @@ const OfferForm = props => {
   };
 
   const setOffer = (values, { resetForm }) => {
+    console.log('values ---> ', values)
+
     props.clearOfferError();
     const data = new FormData();
     const { contestId, contestType, customerId } = props;
@@ -58,6 +64,9 @@ const OfferForm = props => {
     props.contestType === CONTANTS.LOGO_CONTEST
       ? Schems.LogoOfferSchema
       : Schems.TextOfferSchema;
+
+  console.log('valid ---> ', valid)
+
   return (
     <div className={styles.offerContainer}>
       {addOfferError && (
@@ -72,16 +81,19 @@ const OfferForm = props => {
         initialValues={{
           offerData: '',
         }}
+        innerRef={formikRef}
         validationSchema={validationSchema}
       >
-        <Form className={styles.form}>
-          {renderOfferInput()}
-          {valid && (
-            <button type='submit' className={styles.btnOffer}>
-              Send Offer
-            </button>
-          )}
-        </Form>
+        {({ errors, touched }) => (
+          <Form className={styles.form}>
+            {renderOfferInput()}
+            {!errors.offerData && touched.offerData && (
+              <button type='submit' className={styles.btnOffer}>
+                Send Offer
+              </button>
+            )}
+          </Form>
+        )}
       </Formik>
     </div>
   );
