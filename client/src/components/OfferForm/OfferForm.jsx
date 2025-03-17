@@ -46,7 +46,6 @@ const OfferForm = props => {
   };
 
   const setOffer = (values, { resetForm }) => {
-    console.log('values ---> ', values)
 
     props.clearOfferError();
     const data = new FormData();
@@ -65,7 +64,6 @@ const OfferForm = props => {
       ? Schems.LogoOfferSchema
       : Schems.TextOfferSchema;
 
-  console.log('valid ---> ', valid)
 
   return (
     <div className={styles.offerContainer}>

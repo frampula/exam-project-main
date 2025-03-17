@@ -19,12 +19,12 @@ const AddToCatalog = (props) => {
     const { catalogList } = props;
     const valueArray = [];
     catalogList.forEach((catalog) => {
-      valueArray.push(catalog._id);
+      valueArray.push(catalog.id);
     });
     return valueArray;
   };
 
-  const click = (values) => {
+  const submitHandler = (values) => {
     const { addChatId } = props;
     props.addChatToCatalog({ chatId: addChatId, catalogId: values.catalogId });
   };
@@ -33,7 +33,7 @@ const AddToCatalog = (props) => {
   return (
     <>
       {selectArray.length !== 0 ? (
-        <Formik onSubmit={click} initialValues={{ catalogId: '' }}>
+        <Formik onSubmit={submitHandler} initialValues={{ catalogId: '' }}>
           <Form className={styles.form}>
             <SelectInput
               name="catalogId"

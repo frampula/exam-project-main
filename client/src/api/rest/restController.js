@@ -9,10 +9,10 @@ export const setOfferStatus = (data) => http.post('setOfferStatus', data);
 export const downloadContestFile = (data) =>
   http.get(`downloadFile/${data.fileName}`);
 export const payMent = (data) => http.post('pay', data.formData);
-export const changeMark = (data) => http.post('changeMark', data);
+export const changeMark = (data) => http.patch('changeMark', data);
 export const getPreviewChat = () => http.get('getPreview');
 export const getDialog = (data) => http.get('getChat', { params: data });
-export const dataForContest = (data) => http.post('dataForContest', data);
+export const dataForContest = (data) => http.get('dataForContest', { params: data });
 export const cashOut = (data) => http.post('cashout', data);
 export const updateUser = (data) => http.patch('updateUser', data);
 export const newMessage = (data) => http.post('newMessage', data);
@@ -24,17 +24,12 @@ export const addChatToCatalog = (data) =>
 export const createCatalog = (data) => http.post('createCatalog', data);
 export const deleteCatalog = (data) => http.delete('deleteCatalog', { params: data });
 export const removeChatFromCatalog = (data) =>
-  http.post('removeChatFromCatalog', data);
+  http.delete('removeChatFromCatalog', { params: data }); 
 export const changeCatalogName = (data) => http.patch('updateNameCatalog', data);
 export const getCustomersContests = (data) =>
-  http.post(
+  http.get(
     'getCustomersContests',
-    { limit: data.limit, offset: data.offset },
-    {
-      headers: {
-        status: data.contestStatus,
-      },
-    }
+    {params: {status: data.contestStatus, limit: data.limit, offset: data.offset }},
   );
 
 export const getActiveContests = (data) => http.get('getAllContests', { params: data });

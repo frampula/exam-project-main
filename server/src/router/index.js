@@ -23,7 +23,7 @@ router.post(
   userController.login,
 );
 
-router.post(
+router.get(
   '/dataForContest',
   checkToken.checkToken,
   contestController.dataForContest,
@@ -39,7 +39,7 @@ router.post(
   userController.payment,
 );
 
-router.post(
+router.get(
   '/getCustomersContests',
   checkToken.checkToken,
   contestController.getCustomersContests,
@@ -113,7 +113,7 @@ router.post(
   offersController.rejectOfferByModerator,
 );
 
-router.post(
+router.patch(
   '/changeMark',
   checkToken.checkToken,
   basicMiddlewares.onlyForCustomer,
@@ -182,7 +182,7 @@ router.post(
   chatController.addNewChatToCatalog,
 );
 
-router.post( 
+router.delete( 
   '/removeChatFromCatalog',
   checkToken.checkToken,
   chatController.removeChatFromCatalog,

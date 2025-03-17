@@ -10,7 +10,7 @@ const { string } = require('yup');
 module.exports.dataForContest = async (req, res, next) => {
   const response = {};
   try {
-    const { body: { characteristic1, characteristic2 } } = req;
+    const { query: { characteristic1, characteristic2 } } = req;
     const types = [characteristic1, characteristic2, 'industry'].filter(Boolean);
 
     const characteristics = await db.Selects.findAll({
@@ -215,10 +215,11 @@ module.exports.setOfferStatus = async (req, res, next) => {
 };
 
 module.exports.getCustomersContests = (req, res, next) => {
+  try {
   db.Contests.findAll({
-    where: { status: req.headers.status, userId: req.tokenData.userId },
-    limit: req.body.limit,
-    offset: req.body.offset ? req.body.offset : 0,
+    where: { status: req.query.status, userId: req.tokenData.userId },
+    limit: +req.query.limit,
+    offset: req.query.offset ? +req.query.offset : 0,
     order: [['id', 'DESC']],
     include: [
       {
@@ -237,7 +238,10 @@ module.exports.getCustomersContests = (req, res, next) => {
       }
       res.send({ contests, haveMore });
     })
-    .catch(err => next(new ServerError(err)));
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
 };
 
 module.exports.getContests = (req, res, next) => {

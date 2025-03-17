@@ -252,32 +252,34 @@ module.exports.updateNameCatalog = async (req, res, next) => {
 };
 
 module.exports.addNewChatToCatalog = async (req, res, next) => {
+  console.log(req.body.catalogId, req.body.chatId);
   try {
     const catalog = await Catalogs.findOne({
       where: { id: req.body.catalogId, userId: req.tokenData.userId },
     });
 
     if (catalog) {
-      catalog.chats.push(req.body.chatId);
-      await catalog.save();
+      await catalog.update({ chats: [...catalog.chats, req.body.chatId] });
       res.send(catalog);
     } else {
       res.status(404).send({ message: 'Catalog not found' });
     }
   } catch (err) {
+    console.log(err);
     next(err);
   }
 };
 
 module.exports.removeChatFromCatalog = async (req, res, next) => {
+  console.log(req.query.catalogId);
   try {
     const catalog = await Catalogs.findOne({
-      where: { id: req.body.catalogId, userId: req.tokenData.userId },
+      where: { id: req.query.catalogId, userId: req.tokenData.userId },
     });
 
     if (catalog) {
       catalog.chats = catalog.chats.filter(
-        (chatId) => chatId !== req.body.chatId
+        (chatId) => chatId !== +req.query.chatId
       );
       await catalog.save();
       res.send(catalog);
