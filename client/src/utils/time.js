@@ -15,6 +15,7 @@ export const formatTime = (ms) => {
 
 export const convertToMilliseconds = (value, unit) => {
   const conversions = {
+    seconds: value * 1000,
     minutes: value * 60 * 1000,
     hours: value * 60 * 60 * 1000,
     days: value * 24 * 60 * 60 * 1000

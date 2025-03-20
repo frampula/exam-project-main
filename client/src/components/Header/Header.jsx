@@ -117,13 +117,13 @@ const Header = () => {
         </div>
       </div>
       <div className={styles.navContainer}>
-        <a href="/">
+        <Link to="/">
           <img
             src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`}
             className={styles.logo}
             alt="blue_logo"
           />
-        </a>
+        </Link>
         <div className={styles.leftNav}>
           <div className={styles.nav}>
             <ul>

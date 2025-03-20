@@ -236,13 +236,13 @@ export default {
       .max(999, 'Value is too large'),
     timeUnit: yup.string()
       .required('Time unit is required')
-      .oneOf(['minutes', 'hours', 'days'], 'Invalid time unit'),
+      .oneOf(['seconds', 'minutes', 'hours', 'days'], 'Invalid time unit'),
     reminderTime: yup.number()
       .min(0, 'Must be positive')
       .max(100, 'Value is too large')
       .required('Reminder time is required'),
     reminderUnit: yup.string()
       .required('Reminder unit is required')
-      .oneOf(['minutes', 'hours', 'days'], 'Invalid time unit')
+      .oneOf(['seconds', 'minutes', 'hours', 'days'], 'Invalid time unit')
   })  
 };

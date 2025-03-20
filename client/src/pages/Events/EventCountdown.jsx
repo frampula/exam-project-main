@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import styles from './EventCountdown.module.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import {EventCountdownContext} from "../../components/EventCountdownHoc/EventCountdownHoc"
+import { EventCountdownContext } from "../../components/EventCountdown"
 import Schems from '../../utils/validators/validationSchems';
 import { formatTime, convertToMilliseconds } from '../../utils/time';
 
@@ -85,6 +85,7 @@ const EventCountdown = () => {
                 name="timeUnit"
                 className={styles.formTime}
               >
+                <option value="seconds">Seconds</option>
                 <option value="minutes">Minutes</option>
                 <option value="hours">Hours</option>
                 <option value="days">Days</option>
@@ -106,6 +107,7 @@ const EventCountdown = () => {
                 name="reminderUnit"
                 className={styles.formTime}
               >
+                <option value="seconds">Seconds</option>
                 <option value="minutes">Minutes</option>
                 <option value="hours">Hours</option>
                 <option value="days">Days</option>
