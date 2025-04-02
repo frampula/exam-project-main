@@ -8,7 +8,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export const EventCountdownContext = createContext({
   checks: [],
-  handleChecksUpdate: () => {},
+  addCheck: () => {},
+  delCheck: () => {},
+  updateCheck: () => {},
 });
 
 const EventCountdown = ({ children, ...props }) => {
@@ -17,31 +19,25 @@ const EventCountdown = ({ children, ...props }) => {
 
   useEffect(() => {
     const savedChecks = localStorage.getItem('eventChecks');
-
     if (savedChecks) {
       const parsedChecks = JSON.parse(savedChecks);
-      const updatedData = parsedChecks.map((check) => ({
-        ...check,
-        timeLeft: Math.max(0, check.endTime - Date.now()),
-      }));
-      setChecks(updatedData);
+      setChecks(parsedChecks);
     }
   }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setChecks((prevChecks) =>
-        prevChecks.map((check) => {
-          const now = Date.now();
-          const timeLeft = Math.max(0, check.endTime - now);
+      const now = Date.now();
+      setChecks(prevChecks => 
+        prevChecks.map(check => {
+          if (check.status === 'completed') return check;
 
-          if (
-            check.reminderTime &&
-            now >= check.reminderTime &&
-            !check.reminderShown
-          ) {
+          const timeLeft = check.eventDate - now;
+          
+          // Проверка напоминания
+          if (now >= check.reminderDate && !check.reminderShown) {
             toast.info(
-              `Reminder: ${check.name} will end in ${formatTime(timeLeft)}!`,
+              `Напоминание: до события "${check.name}" осталось ${formatTime(timeLeft)}!`,
               {
                 position: 'top-right',
                 autoClose: 5000,
@@ -54,8 +50,9 @@ const EventCountdown = ({ children, ...props }) => {
             return { ...check, reminderShown: true, timeLeft };
           }
 
-          if (timeLeft === 0 && check.status !== 'completed') {
-            toast.success(`Event completed: ${check.name}`, {
+          // Проверка завершения события
+          if (timeLeft <= 0) {
+            toast.success(`Событие завершено: ${check.name}`, {
               position: 'top-right',
               autoClose: 5000,
             });
@@ -63,9 +60,10 @@ const EventCountdown = ({ children, ...props }) => {
               ...check,
               status: 'completed',
               backgroundColor: '#f5f5f5',
-              timeLeft,
+              timeLeft: 0
             };
           }
+
           return { ...check, timeLeft };
         })
       );
@@ -83,24 +81,38 @@ const EventCountdown = ({ children, ...props }) => {
 
   const handleAddCheck = useCallback(
     (newCheck) => {
-      const newChecks = [...checks, newCheck];
-      setChecks(newChecks);
+      setChecks(prevChecks => [...prevChecks, newCheck]);
     },
-    [checks]
+    []
   );
 
   const handleDelCheck = useCallback(
     (index) => {
-      const newChecks = checks.filter((_, i) => i !== index);
-      setChecks(newChecks);
+      setChecks(prevChecks => prevChecks.filter((_, i) => i !== index));
     },
-    [checks]
+    []
+  );
+
+  const handleUpdateCheck = useCallback(
+    (index, updatedCheck) => {
+      setChecks(prevChecks => 
+        prevChecks.map((check, i) => 
+          i === index ? updatedCheck : check
+        )
+      );
+    },
+    []
   );
 
   return (
     <>
       <EventCountdownContext.Provider
-        value={{ addCheck: handleAddCheck, delCheck: handleDelCheck, checks }}
+        value={{ 
+          addCheck: handleAddCheck, 
+          delCheck: handleDelCheck, 
+          updateCheck: handleUpdateCheck,
+          checks 
+        }}
       >
         {children}
       </EventCountdownContext.Provider>

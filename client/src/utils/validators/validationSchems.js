@@ -227,22 +227,16 @@ export default {
   }),
   CheckSchema: yup.object().shape({
     name: yup.string()
-      .required('Check name is required')
-      .min(3, 'Too Short!')
-      .max(50, 'Too Long!'),
-    duration: yup.number()
-      .required('Duration is required')
-      .positive('Must be positive')
-      .max(999, 'Value is too large'),
-    timeUnit: yup.string()
-      .required('Time unit is required')
-      .oneOf(['seconds', 'minutes', 'hours', 'days'], 'Invalid time unit'),
-    reminderTime: yup.number()
-      .min(0, 'Must be positive')
-      .max(100, 'Value is too large')
-      .required('Reminder time is required'),
-    reminderUnit: yup.string()
-      .required('Reminder unit is required')
-      .oneOf(['seconds', 'minutes', 'hours', 'days'], 'Invalid time unit')
+      .required('Название события обязательно')
+      .min(3, 'Слишком короткое!')
+      .max(50, 'Слишком длинное!'),
+    eventDate: yup.date()
+      .required('Дата события обязательна')
+      .min(new Date(), 'Дата события должна быть в будущем'),
+    reminderDate: yup.date()
+      .required('Дата напоминания обязательна')
+      .test('reminder-before-event', 'Дата напоминания должна быть раньше даты события', function(value) {
+        return value < this.parent.eventDate;
+      })
   })  
 };
