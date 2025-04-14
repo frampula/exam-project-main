@@ -113,6 +113,7 @@ export const changeChatFavorite = decorateAsyncThunk({
   key: `${CHAT_SLICE_NAME}/changeChatFavorite`,
   thunk: async payload => {
     const { data } = await restController.changeChatFavorite(payload);
+
     return data;
   },
 });
@@ -125,7 +126,8 @@ const changeChatFavoriteExtraReducers = createExtraReducers({
       if (isEqual(preview.participants, payload.participants))
         preview.favoriteList = payload.favoriteList;
     });
-    state.chatData = payload;
+
+    state.chatData.favoriteList = payload.favoriteList;
     state.messagesPreview = messagesPreview;
   },
   rejectedReducer: (state, { payload }) => {
@@ -149,7 +151,8 @@ const changeChatBlockExtraReducers = createExtraReducers({
       if (isEqual(preview.participants, payload.participants))
         preview.blackList = payload.blackList;
     });
-    state.chatData = payload;
+
+    state.chatData.blackList = payload.blackList;
     state.messagesPreview = messagesPreview;
   },
   rejectedReducer: (state, { payload }) => {
@@ -304,7 +307,7 @@ const reducers = {
       if (isEqual(preview.participants, payload.participants))
         preview.blackList = payload.blackList;
     });
-    state.chatData = payload;
+    state.chatData.blackList = payload.blackList;
     state.messagesPreview = messagesPreview;
   },
 

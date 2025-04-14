@@ -1,32 +1,29 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { getUser } from '../../store/slices/userSlice';
 import Spinner from '../Spinner/Spinner';
 
 const OnlyNotAuthorizedUserHoc = Component => {
-  class HocForLoginSignUp extends React.Component {
-    componentDidMount () {
-      this.props.checkAuth(this.props.history.replace);
+  const WrappedComponent = ({ history }) => {
+    const dispatch = useDispatch();
+    const { isFetching, data } = useSelector(state => state.userStore);
+
+    useEffect(() => {
+      dispatch(getUser(history.replace));
+    }, [dispatch, history.replace]);
+
+    if (isFetching) {
+      return <Spinner />;
     }
 
-    render () {
-      if (this.props.isFetching) {
-        return <Spinner />;
-      }
-      if (!this.props.data) {
-        return <Component history={this.props.history} />;
-      }
-      return null;
+    if (!data) {
+      return <Component history={history} />;
     }
-  }
 
-  const mapStateToProps = state => state.userStore;
+    return null;
+  };
 
-  const mapDispatchToProps = dispatch => ({
-    checkAuth: replace => dispatch(getUser(replace)),
-  });
-
-  return connect(mapStateToProps, mapDispatchToProps)(HocForLoginSignUp);
+  return WrappedComponent;
 };
 
 export default OnlyNotAuthorizedUserHoc;
